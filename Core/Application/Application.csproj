@@ -33,5 +33,10 @@
     <Exec Command="rd &quot;$(ProjectDir)bin&quot; /s /q" />
     <Exec Command="rd &quot;$(ProjectDir)obj&quot; /s /q" />
   </Target>
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
 
 </Project>
