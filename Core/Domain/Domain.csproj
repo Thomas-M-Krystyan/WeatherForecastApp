@@ -17,8 +17,8 @@
     
     <!-- Build: Output -->
     <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-    <BaseOutputPath>$(SolutionDir)\bin</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(SolutionDir)\obj</BaseIntermediateOutputPath>
+    <BaseOutputPath>$(SolutionDir)bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)obj</BaseIntermediateOutputPath>
     
     <!-- Build: Events -->
     <RunPostBuildEvent>Always</RunPostBuildEvent>
