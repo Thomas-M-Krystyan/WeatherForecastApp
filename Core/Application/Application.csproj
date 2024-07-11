@@ -28,7 +28,7 @@
     <AnalysisLevel>latest-all</AnalysisLevel>
   </PropertyGroup>
 
-  <!-- NOTE: Remove empty [obj] folder from the project catalog -->
+  <!-- NOTE: Remove empty [bin] and [obj] folders from the project catalog -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="rd &quot;$(ProjectDir)bin&quot; /s /q" />
     <Exec Command="rd &quot;$(ProjectDir)obj&quot; /s /q" />
