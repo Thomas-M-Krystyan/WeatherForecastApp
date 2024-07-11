@@ -16,6 +16,7 @@
     </NoWarn>
     
     <!-- Build: Output -->
+    <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
     <BaseOutputPath>$(SolutionDir)\bin</BaseOutputPath>
     <BaseIntermediateOutputPath>$(SolutionDir)\obj</BaseIntermediateOutputPath>
     
