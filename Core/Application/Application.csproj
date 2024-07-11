@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Application: General -->
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>$(SolutionName).$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>$(SolutionName).$(MSBuildProjectName)</RootNamespace>
+
+    <!-- Build: General -->
+    <Nullable>enable</Nullable>
+
+    <!-- Build: Errors and warnings -->
+    <NoWarn>
+      1701;1702;
+      MSB3539  <!-- NOTE: Do not notify that output directory was changed -->
+    </NoWarn>
+
+    <!-- Build: Output -->
+    <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+    <BaseOutputPath>$(SolutionDir)\bin</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)\obj</BaseIntermediateOutputPath>
+
+    <!-- Build: Events -->
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+
+    <!-- Code Analysis: .NET analyzers -->
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest-all</AnalysisLevel>
+  </PropertyGroup>
+
+  <!-- NOTE: Remove empty [obj] folder from the project catalog -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="rd &quot;$(ProjectDir)bin&quot; /s /q" />
+    <Exec Command="rd &quot;$(ProjectDir)obj&quot; /s /q" />
+  </Target>
+
+</Project>
