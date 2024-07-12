@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
-using WeatherForecastApp.WebApi.Constants;
+using WeatherForecastApp.Application.Repository;
+using WeatherForecastApp.Domain.Models;
+using WeatherForecastApp.Persistence.Context;
 using WeatherForecastApp.WebApi.Properties;
 
 namespace WebApi
@@ -46,6 +49,9 @@ namespace WebApi
 
         private static WebApplicationBuilder RegisterInternalServices(this WebApplicationBuilder builder)
         {
+            // Repository
+            builder.Services.AddSingleton<IRepositoryContext<DbSet<WeatherForecastEntity>>, WeatherForecastContext>();
+
             return builder;
         }
 
