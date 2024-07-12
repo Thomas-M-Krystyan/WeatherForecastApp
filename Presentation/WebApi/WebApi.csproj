@@ -1,21 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <!-- Application: General -->
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>$(SolutionName).$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>$(SolutionName).$(MSBuildProjectName)</RootNamespace>
-    <InvariantGlobalization>true</InvariantGlobalization>
 
     <!-- Build: General -->
     <Nullable>enable</Nullable>
-
-    <!-- Code Analysis: .NET analyzers -->
-    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-    <AnalysisLevel>latest-all</AnalysisLevel>
-
-    <!-- Secrets -->
-    <UserSecretsId>74c57e79-331e-4dd1-9239-b12e38cd1bd3</UserSecretsId>
 
     <!-- Docker -->
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -26,8 +18,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.6.2" />
   </ItemGroup>
 
 </Project>

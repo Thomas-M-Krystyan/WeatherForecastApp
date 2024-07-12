@@ -1,4 +1,7 @@
 ﻿[*.cs]
 
 # IDE0290: Use primary constructor
-dotnet_diagnostic.IDE0290.severity = none
+dotnet_diagnostic.IDE0290.severity = silent
+
+# IDE0058: Expression value is never used
+dotnet_diagnostic.IDE0058.severity = silent
