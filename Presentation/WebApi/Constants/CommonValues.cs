@@ -8,7 +8,6 @@
             internal const string Endpoint = "WeatherForecast";
             internal const string Title = "Weather Forecast App";
             internal const string Description = "The application used to store and display weather forecasts.";
-
         }
     }
 }
