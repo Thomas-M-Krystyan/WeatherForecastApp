@@ -10,11 +10,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <!-- NuGet packages -->
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.5.1" />
   </ItemGroup>
-
-  <!-- NuGet packages -->
 
   <!-- Projects -->
   <ItemGroup>
