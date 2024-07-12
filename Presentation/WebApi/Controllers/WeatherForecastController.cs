@@ -17,7 +17,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<object> Get()
         {
             throw new NotImplementedException();
         }
