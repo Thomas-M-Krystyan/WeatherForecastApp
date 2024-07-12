@@ -4,19 +4,29 @@ using Microsoft.Extensions.Hosting;
 
 namespace WebApi
 {
-    public static class Program
+    internal static class Program
     {
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            WebApplication.CreateBuilder(args)
+                .RegisterDotNetServices()
+                .ConfigureHttpPipeline()
+                .Run();
+        }
 
+        private static WebApplicationBuilder RegisterDotNetServices(this WebApplicationBuilder builder)
+        {
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            return builder;
+        }
+
+        private static WebApplication ConfigureHttpPipeline(this WebApplicationBuilder builder)
+        {
             WebApplication app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -27,7 +37,7 @@ namespace WebApi
 
             app.MapControllers();
 
-            app.Run();
+            return app;
         }
     }
 }
