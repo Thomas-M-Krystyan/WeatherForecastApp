@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 using WeatherForecastApp.WebApi.Constants;
 
 namespace WebApi
@@ -25,11 +26,16 @@ namespace WebApi
             builder.Services.AddSwaggerGen(options =>
             {
                 // Mapping XML documentation
-                options.IncludeXmlComments($"{AppDomain.CurrentDomain.BaseDirectory}\\{nameof(WeatherForecastApp)}.{nameof(WebApi)}.xml");
-                options.SwaggerDoc(CommonValues.Swagger.DocumentVersion, new OpenApiInfo
+                string applicationDirectory = AppContext.BaseDirectory;
+                string applicationDocName = $"{nameof(WeatherForecastApp)}.{nameof(WebApi)}.xml";
+                string applicationDocPath = Path.Combine(applicationDirectory, applicationDocName);
+
+                options.IncludeXmlComments(applicationDocPath);
+                options.SwaggerDoc(CommonValues.Swagger.OpenApiVersion, new OpenApiInfo
                 {
-                    Version = CommonValues.Swagger.DocumentVersion,
+                    Version = CommonValues.Swagger.OpenApiVersion,
                     Title = CommonValues.Swagger.Title,
+                    Description = CommonValues.Swagger.Description,
                 });
 
             });
