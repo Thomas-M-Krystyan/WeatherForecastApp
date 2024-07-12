@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <!-- Application: General -->
@@ -9,11 +9,12 @@
     <!-- Build: General -->
     <Nullable>enable</Nullable>
 
+    <!-- Build: Output -->
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    
     <!-- Docker -->
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <!-- NuGet packages -->
