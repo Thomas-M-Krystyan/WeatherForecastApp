@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using WeatherForecastApp.WebApi.Constants;
+using WeatherForecastApp.WebApi.Properties;
 
 namespace WebApi
 {
@@ -13,12 +14,13 @@ namespace WebApi
         private static void Main(string[] args)
         {
             WebApplication.CreateBuilder(args)
-                .RegisterDotNetServices()
+                .RegisterExternalServices()  // .NET and other 3rd party services
+                .RegisterInternalServices()  // solution-specific internal services
                 .ConfigureHttpPipeline()
                 .Run();
         }
 
-        private static WebApplicationBuilder RegisterDotNetServices(this WebApplicationBuilder builder)
+        private static WebApplicationBuilder RegisterExternalServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -31,15 +33,19 @@ namespace WebApi
                 string applicationDocPath = Path.Combine(applicationDirectory, applicationDocName);
 
                 options.IncludeXmlComments(applicationDocPath);
-                options.SwaggerDoc(CommonValues.Swagger.OpenApiVersion, new OpenApiInfo
+                options.SwaggerDoc(Resource.Swagger_Version, new OpenApiInfo
                 {
-                    Version = CommonValues.Swagger.OpenApiVersion,
-                    Title = CommonValues.Swagger.Title,
-                    Description = CommonValues.Swagger.Description,
+                    Version = Resource.Swagger_Version,
+                    Title = Resource.Swagger_Title,
+                    Description = Resource.Swagger_Description,
                 });
-
             });
 
+            return builder;
+        }
+
+        private static WebApplicationBuilder RegisterInternalServices(this WebApplicationBuilder builder)
+        {
             return builder;
         }
 
@@ -50,8 +56,7 @@ namespace WebApi
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(options
-                    => options.SwaggerEndpoint("/swagger/v1/swagger.json", CommonValues.Swagger.Endpoint));
+                app.UseSwaggerUI();
             }
 
             app.UseAuthorization();
