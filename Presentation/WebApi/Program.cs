@@ -7,6 +7,8 @@ using System;
 using System.IO;
 using WeatherForecastApp.Application.Repository;
 using WeatherForecastApp.Domain.Models;
+using WeatherForecastApp.Domain.Resolvers;
+using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Persistence.Context;
 using WeatherForecastApp.WebApi.Properties;
 
@@ -51,6 +53,9 @@ namespace WebApi
         {
             // Repository
             builder.Services.AddSingleton<IRepositoryContext<DbSet<WeatherForecastEntity>>, WeatherForecastContext>();
+
+            // Converters
+            builder.Services.AddSingleton<IUnitConverterResolver, UnitConverterResolver>();
 
             return builder;
         }

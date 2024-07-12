@@ -1,4 +1,4 @@
-﻿using WeatherForecastApp.Domain.Interfaces.Units;
+﻿using WeatherForecastApp.Domain.Models.Units.Interfaces;
 
 namespace WeatherForecastApp.Domain.Models.Units
 {

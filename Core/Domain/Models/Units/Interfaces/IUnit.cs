@@ -1,4 +1,4 @@
-﻿namespace WeatherForecastApp.Domain.Interfaces.Units
+﻿namespace WeatherForecastApp.Domain.Models.Units.Interfaces
 {
     /// <summary>
     /// The model representing a base unit of measurement.
