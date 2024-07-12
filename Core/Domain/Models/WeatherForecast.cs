@@ -1,4 +1,6 @@
 ﻿using System;
+using WeatherForecastApp.Domain.Interfaces.Units;
+using WeatherForecastApp.Domain.Models.Units;
 
 namespace WeatherForecastApp.Domain.Models
 {
@@ -15,12 +17,12 @@ namespace WeatherForecastApp.Domain.Models
         /// <summary>
         /// The temperature in C°.
         /// </summary>
-        public float TemperatureInC { get; }
+        public IUnit<float> TempCelsius { get; }
 
         /// <summary>
         /// The temperature in F°.
         /// </summary>
-        public float TemperatureInF { get; }
+        public IUnit<float> TempFahrenheit { get; }
 
         /// <summary>
         /// The human-friendly weather forecast description.
@@ -31,14 +33,14 @@ namespace WeatherForecastApp.Domain.Models
         /// Initializes a new instance of the <see cref="WeatherForecast"/> struct.
         /// </summary>
         /// <param name="date"><inheritdoc cref="DateTime" path="/summary"/></param>
-        /// <param name="tempC"><inheritdoc cref="TemperatureInC" path="/summary"/></param>
-        /// <param name="tempF"><inheritdoc cref="TemperatureInF" path="/summary"/></param>
+        /// <param name="tempC"><inheritdoc cref="TempCelsius" path="/summary"/></param>
+        /// <param name="tempF"><inheritdoc cref="TempFahrenheit" path="/summary"/></param>
         /// <param name="description"><inheritdoc cref="Description" path="/summary"/></param>
         public WeatherForecast(DateTime date, float tempC, float tempF, string description)
         {
             this.DateTime = date;
-            this.TemperatureInC = tempC;
-            this.TemperatureInF = tempF;
+            this.TempCelsius = new TemperatureCelsius(tempC);
+            this.TempFahrenheit = new TemperatureFahrenheit(tempF);
             this.Description = description;
         }
     }

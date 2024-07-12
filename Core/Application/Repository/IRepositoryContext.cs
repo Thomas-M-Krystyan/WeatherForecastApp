@@ -25,7 +25,7 @@ namespace WeatherForecastApp.Application.Repository
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>
-        ///   The number of affected rows.
+        /// The number of affected rows.
         /// </returns>
         public Task<int> SaveChangesAsync(CancellationToken? cancellationToken = default);
     }
