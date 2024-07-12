@@ -10,11 +10,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <!-- NuGet packages -->
-  <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.5.1" />
-  </ItemGroup>
-
   <!-- Projects -->
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />

@@ -1,20 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
-using WeatherForecastApp.Application.Entities.Interfaces;
-using WeatherForecastApp.Domain.Entities.Models;
+using WeatherForecastApp.Application.Repository;
+using WeatherForecastApp.Domain.Models;
 
 namespace WeatherForecastApp.Persistence.Context
 {
     /// <summary>
-    /// The weather forecast database context.
+    /// <inheritdoc cref="IRepositoryContext{IRepository}"/>
+    /// Implemented as a <see cref="WeatherForecastEntity"/> SQL database.
     /// </summary>
-    /// <seealso cref="DbContext" />
-    /// <seealso cref="IDomainContext{TEntity}" />
-    public sealed class WeatherForecastContext : DbContext, IDomainContext<WeatherForecast>
+    /// <seealso cref="DbContext"/>
+    /// <seealso cref="IRepositoryContext{TRepository}"/>
+    public sealed class WeatherForecastContext : DbContext, IRepositoryContext<DbSet<WeatherForecastEntity>>
     {
-        /// <inheritdoc cref="IDomainContext{TEntity}.Entities"/>
-        public System.Data.Entity.DbSet<WeatherForecast> Entities { get; set; } = null!;
+        /// <inheritdoc cref="IRepositoryContext{TRepository}.Entities"/>
+        public DbSet<WeatherForecastEntity> Entities { get; set; } = null!;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WeatherForecastContext"/> class.
@@ -24,10 +25,10 @@ namespace WeatherForecastApp.Persistence.Context
         {
         }
 
-        /// <inheritdoc cref="IDomainContext{TEntity}.SaveChangesAsync(CancellationToken)"/>
-        async Task<int> IDomainContext<WeatherForecast>.SaveChangesAsync(CancellationToken cancellationToken)
+        /// <inheritdoc cref="IRepositoryContext{TRepository}.SaveChangesAsync(CancellationToken?)"/>
+        public async Task<int> SaveChangesAsync(CancellationToken? cancellationToken)
         {
-            return await SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken ?? CancellationToken.None);
         }
     }
 }
