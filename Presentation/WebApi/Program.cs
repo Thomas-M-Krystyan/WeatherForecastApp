@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
+using WeatherForecastApp.WebApi.Constants;
 
 namespace WebApi
 {
@@ -18,7 +21,18 @@ namespace WebApi
         {
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSwaggerGen(options =>
+            {
+                // Mapping XML documentation
+                options.IncludeXmlComments($"{AppDomain.CurrentDomain.BaseDirectory}\\{nameof(WeatherForecastApp)}.{nameof(WebApi)}.xml");
+                options.SwaggerDoc(CommonValues.Swagger.DocumentVersion, new OpenApiInfo
+                {
+                    Version = CommonValues.Swagger.DocumentVersion,
+                    Title = CommonValues.Swagger.Title,
+                });
+
+            });
 
             return builder;
         }
@@ -30,7 +44,8 @@ namespace WebApi
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(options
+                    => options.SwaggerEndpoint("/swagger/v1/swagger.json", CommonValues.Swagger.Endpoint));
             }
 
             app.UseAuthorization();
