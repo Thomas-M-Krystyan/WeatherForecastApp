@@ -9,9 +9,6 @@
     <!-- Build: General -->
     <Nullable>enable</Nullable>
 
-    <!-- Build: Events -->
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
-
     <!-- Code Analysis: .NET analyzers -->
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest-all</AnalysisLevel>
