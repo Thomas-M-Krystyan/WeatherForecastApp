@@ -55,7 +55,8 @@ namespace WebApi
             builder.Services.AddSingleton<IRepositoryContext<DbSet<WeatherForecastEntity>>, WeatherForecastContext>();
 
             // Converters
-            builder.Services.AddSingleton<IUnitConverterResolver, UnitConverterResolver>();
+            builder.Services.AddSingleton<IServiceHandler>();
+            builder.Services.AddSingleton<IServiceResolver, ServiceResolver>();
 
             return builder;
         }
