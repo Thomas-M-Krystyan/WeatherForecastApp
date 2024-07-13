@@ -10,7 +10,7 @@
         /// The name of the unit.
         /// </summary>
         /// <remarks>
-        /// This value is set once and persisted during the application lifetime.
+        /// NOTE: This value is set once and persisted during the application lifetime.
         /// </remarks>
         public static string Name { get; } = string.Empty;
 
@@ -18,7 +18,7 @@
         /// The symbol of the unit.
         /// </summary>
         /// <remarks>
-        /// This value is set once and persisted during the application lifetime.
+        /// NOTE: This value is set once and persisted during the application lifetime.
         /// </remarks>
         public static string Symbol { get; } = string.Empty;
 
