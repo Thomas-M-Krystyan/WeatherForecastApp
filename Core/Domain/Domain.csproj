@@ -12,7 +12,7 @@
 
   <!-- Exposition to external projects -->
   <ItemGroup>
-    <InternalsVisibleTo Include="WeatherForecastApp.Domain.Tests"/>
+    <InternalsVisibleTo Include="WeatherForecastApp.Domain.Tests" />
   </ItemGroup>
 
 </Project>
