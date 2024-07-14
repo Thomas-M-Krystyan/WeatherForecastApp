@@ -1,17 +1,18 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using WeatherForecastApp.WebApi.Constants;
+using WeatherForecastApp.WebApi.Controllers.Base;
 
-namespace WebApi.Controllers
+namespace WeatherForecastApp.WebApi.Controllers.v1
 {
     /// <summary>
     /// Main functionalities of the Weather Forecast App.
     /// </summary>
-    /// <seealso cref="ControllerBase" />
-    [ApiController]
-    [Route("[controller]")]
-    public sealed class WeatherForecastController : ControllerBase
+    [ApiVersion(ApiCommonValues.Version.Default)]
+    public sealed class WeatherForecastController : BaseApiController
     {
         private readonly ILogger<WeatherForecastController> _logger;
 
@@ -20,7 +21,7 @@ namespace WebApi.Controllers
         /// </summary>
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            this._logger = logger;
+            _logger = logger;
         }
 
         [HttpGet]

@@ -22,14 +22,5 @@
         {
             public const string ConnectionString = "CONNECTION_STRING";
         }
-
-        /// <summary>
-        /// Version of the application.
-        /// </summary>
-        public static class Version
-        {
-            public const ushort Major = 1;
-            public const ushort Minor = 0;
-        }
     }
 }

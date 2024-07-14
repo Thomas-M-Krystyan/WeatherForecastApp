@@ -12,6 +12,7 @@ using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Resolvers;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Persistence.Context;
+using WeatherForecastApp.WebApi.Constants;
 using WeatherForecastApp.WebApi.Properties;
 
 namespace WebApi
@@ -60,7 +61,7 @@ namespace WebApi
             // Version of the application
             builder.Services.AddApiVersioning(config =>
             {
-                config.DefaultApiVersion = new ApiVersion(CommonValues.Version.Major, CommonValues.Version.Minor);
+                config.DefaultApiVersion = new ApiVersion(ApiCommonValues.Version.Default);
                 config.AssumeDefaultVersionWhenUnspecified = true;
                 config.ReportApiVersions = true;
             });
