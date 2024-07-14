@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using WeatherForecastApp.Application.Repository;
+using WeatherForecastApp.Domain.Constants;
 using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Resolvers;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
@@ -36,9 +36,7 @@ namespace WebApi
             builder.Services.AddDbContext<WeatherForecastContext>(options =>
             {
                 options.UseSqlServer(
-                    connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
-                    sqlServerOptionsAction: optionsBuilder =>
-                        optionsBuilder.MigrationsAssembly(typeof(WeatherForecastContext).Assembly.FullName));
+                    connectionString: Environment.GetEnvironmentVariable(CommonValues.EnvironmentVariables.ConnectionString));
             });
 
             // Swagger UI
