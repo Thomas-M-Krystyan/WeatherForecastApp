@@ -14,10 +14,10 @@ namespace WeatherForecastApp.Domain.Converters
     {
         private static float CelsiusToFahrenheit(float tempC) => tempC * 9 / 5 + 32;
 
-        private static float FahrenheitToCelsius(float tempF) => tempF - 32 * 5 / 9;
+        private static float FahrenheitToCelsius(float tempF) => (tempF - 32) * 5 / 9;
 
-        /// <inheritdoc cref="IUnitConverter{TUnitA, TUnitB}.ConvertTo(TUnitA)"/>
-        public TemperatureFahrenheit ConvertTo(TemperatureCelsius unit)
+        /// <inheritdoc cref="IUnitConverter{TUnitA, TUnitB}.ConvertFrom(TUnitA)"/>
+        public TemperatureFahrenheit ConvertFrom(TemperatureCelsius unit)
         {
             return new TemperatureFahrenheit(CelsiusToFahrenheit(unit.Value));
         }

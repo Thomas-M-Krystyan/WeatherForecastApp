@@ -10,12 +10,12 @@ namespace WeatherForecastApp.Domain.Converters.Interfaces
     public interface IUnitConverter<TUnitA, TUnitB>
     {
         /// <summary>
-        /// Converts <see cref="TUnitA"/> into <see cref="TUnitB"/>.
+        /// Converts from <typeparamref name="TUnitA"/> to <typeparamref name="TUnitB"/>.
         /// </summary>
-        public TUnitB ConvertTo(TUnitA unit);
+        public TUnitB ConvertFrom(TUnitA unit);
 
         /// <summary>
-        /// Converts <see cref="TUnitB"/> into <see cref="TUnitA"/>.
+        /// Converts <typeparamref name="TUnitB"/> back to <typeparamref name="TUnitA"/>.
         /// </summary>
         public TUnitA ConvertBack(TUnitB unit);
     }
