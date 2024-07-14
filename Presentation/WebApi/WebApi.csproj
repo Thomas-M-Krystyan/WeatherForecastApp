@@ -10,6 +10,8 @@
     <Nullable>enable</Nullable>
 
     <!-- Build: Errors and warnings -->
+    <NoWarn>1701;1702;CS9057</NoWarn>
+    
     <!-- Build: Output -->
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     
