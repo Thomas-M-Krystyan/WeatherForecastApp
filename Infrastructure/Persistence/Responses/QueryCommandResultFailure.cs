@@ -1,27 +1,27 @@
 ﻿using System;
-using WeatherForecastApp.WebApi.Properties;
+using WeatherForecastApp.Persistence.Properties;
 
 namespace WeatherForecastApp.WebApi.Responses
 {
     /// <summary>
-    /// <inheritdoc cref="CommandResult"/>
+    /// <inheritdoc cref="QueryCommandResult"/>
     /// <para>
     /// The feedback for failed operation.
     /// </para>
     /// </summary>
-    internal sealed record CommandResultFailure : CommandResult
+    public sealed record QueryCommandResultFailure : QueryCommandResult
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CommandResultFailure"/> class.
+        /// Initializes a new instance of the <see cref="QueryCommandResultFailure"/> class.
         /// </summary>
-        internal CommandResultFailure()
+        public QueryCommandResultFailure()
             : base(false, 0, Resource.RESPONSE_Command_Failure_NotChanged)
         {
         }
 
-        /// <inheritdoc cref="CommandResultFailure()"/>
+        /// <inheritdoc cref="QueryCommandResultFailure()"/>
         /// <param name="exception">The exception captured during the workflow.</param>
-        internal CommandResultFailure(Exception exception)
+        public QueryCommandResultFailure(Exception exception)
             : base(false, 0, $"{Resource.RESPONSE_Command_Failure_Error} | {exception.GetType} | {exception.Message}.")
         {
         }

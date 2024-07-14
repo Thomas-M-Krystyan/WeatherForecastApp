@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeatherForecastApp.WebApi.Properties {
+namespace WeatherForecastApp.Persistence.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WeatherForecastApp.WebApi.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WeatherForecastApp.WebApi.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WeatherForecastApp.Persistence.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace WeatherForecastApp.WebApi.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The application used to store and display weather forecasts..
+        ///   Looks up a localized string similar to The operation wasn&apos;t successful. Errors encountered..
         /// </summary>
-        internal static string Swagger_Description {
+        internal static string RESPONSE_Command_Failure_Error {
             get {
-                return ResourceManager.GetString("Swagger_Description", resourceCulture);
+                return ResourceManager.GetString("RESPONSE_Command_Failure_Error", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weather Forecast App.
+        ///   Looks up a localized string similar to The operation wasn&apos;t successful. Nothing was changed..
         /// </summary>
-        internal static string Swagger_Title {
+        internal static string RESPONSE_Command_Failure_NotChanged {
             get {
-                return ResourceManager.GetString("Swagger_Title", resourceCulture);
+                return ResourceManager.GetString("RESPONSE_Command_Failure_NotChanged", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to v1.
+        ///   Looks up a localized string similar to The operation was successful. The change was saved..
         /// </summary>
-        internal static string Swagger_Version {
+        internal static string RESPONSE_Command_Success {
             get {
-                return ResourceManager.GetString("Swagger_Version", resourceCulture);
+                return ResourceManager.GetString("RESPONSE_Command_Success", resourceCulture);
             }
         }
     }

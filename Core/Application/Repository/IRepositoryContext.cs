@@ -29,6 +29,6 @@ namespace WeatherForecastApp.Application.Repository
         /// <returns>
         /// The status of the ACID operation.
         /// </returns>
-        public Task<QueryResult> SaveChangesAsync(CancellationToken? cancellationToken = default);
+        public Task<RepositoryResult> SaveChangesAsync(CancellationToken? cancellationToken = default);
     }
 }
