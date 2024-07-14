@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -27,9 +28,20 @@ namespace WebApi
 
         private static WebApplicationBuilder RegisterExternalServices(this WebApplicationBuilder builder)
         {
+            // API endpoints
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
 
+            // MS SQL Server
+            builder.Services.AddDbContext<WeatherForecastContext>(options =>
+            {
+                options.UseSqlServer(
+                    connectionString: builder.Configuration.GetConnectionString("DefaultConnection"),
+                    sqlServerOptionsAction: optionsBuilder =>
+                        optionsBuilder.MigrationsAssembly(typeof(WeatherForecastContext).Assembly.FullName));
+            });
+
+            // Swagger UI
             builder.Services.AddSwaggerGen(options =>
             {
                 // Mapping XML documentation
@@ -52,10 +64,10 @@ namespace WebApi
         private static WebApplicationBuilder RegisterInternalServices(this WebApplicationBuilder builder)
         {
             // Repository
-            builder.Services.AddSingleton<IRepositoryContext<DbSet<WeatherForecastEntity>>, WeatherForecastContext>();
+            builder.Services.AddScoped<IRepositoryContext<DbSet<WeatherForecastEntity>>, WeatherForecastContext>();
 
-            // Converters
-            builder.Services.AddSingleton<IServiceHandler>();
+            // Resolvers
+            builder.Services.AddSingleton<IServiceHandler, ServiceHandler>();
             builder.Services.AddSingleton<IServiceResolver, ServiceResolver>();
 
             return builder;
