@@ -28,11 +28,11 @@ namespace WeatherForecastApp.Persistence.Context
         }
 
         /// <inheritdoc cref="IRepositoryContext{TRepository}.SaveChangesAsync(CancellationToken?)"/>
-        public async Task<RepositoryResult> SaveChangesAsync(CancellationToken? cancellationToken)
+        public async Task<QueryResult> SaveChangesAsync(CancellationToken? cancellationToken)
         {
             int changesCount = await base.SaveChangesAsync(cancellationToken ?? CancellationToken.None);
 
-            return new RepositoryResult(changesCount > 0, changesCount);
+            return new QueryResult(changesCount > 0, changesCount);
         }
 
         /// <inheritdoc cref="DbContext.Dispose()"/>

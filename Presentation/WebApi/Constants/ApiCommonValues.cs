@@ -1,4 +1,4 @@
-﻿namespace WeatherForecastApp.WebApi.Constants
+﻿namespace WeatherForecastApp.Persistence.Constants
 {
     /// <summary>
     /// Common values for the main API project.

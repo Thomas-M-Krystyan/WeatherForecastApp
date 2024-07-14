@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WeatherForecastApp.WebApi.Controllers.Base
+namespace WeatherForecastApp.Persistence.Controllers.Base
 {
     /// <summary>
     /// Base controller for all API controllers in this application.

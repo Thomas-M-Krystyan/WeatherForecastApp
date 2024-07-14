@@ -2,9 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Repository;
-using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Persistence.Entities.Interfaces;
-using WeatherForecastApp.WebApi.Responses;
+using WeatherForecastApp.Persistence.Responses;
 
 namespace WeatherForecastApp.Persistence.Commands.Base
 {
@@ -17,25 +16,15 @@ namespace WeatherForecastApp.Persistence.Commands.Base
         where TEntity : class, IRepositoryEntity
         where TModel : struct
     {
-        /// <inheritdoc cref="IRepositoryContext{TRepository}"/>
-        protected IRepositoryContext<DbSet<TEntity>> RepositoryContext { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="QueryCommand{TEntity, TModel}"/> class.
-        /// </summary>
-        protected QueryCommand(IServiceResolver serviceResolver)
-        {
-            this.RepositoryContext = serviceResolver.Resolve<IRepositoryContext<DbSet<TEntity>>>();
-        }
-
         /// <summary>
         /// Process a specific operation implemented by the command.
         /// </summary>
         /// <param name="dto">The Data Transfer Object (DTO) to be consumed.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>
-        /// The response from the executed command operation.
+        /// The response from the executed <see cref="QueryCommand{TEntity, TModel}"/> operation.
         /// </returns>
-        public abstract Task<QueryCommandResult> ExecuteAsync(TModel dto, CancellationToken cancellationToken = default);
+        public abstract Task<QueryCommandResult> ExecuteAsync(
+            IRepositoryContext<DbSet<TEntity>> repositoryContext, TModel dto, CancellationToken cancellationToken = default);
     }
 }

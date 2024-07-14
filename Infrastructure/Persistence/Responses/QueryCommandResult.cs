@@ -1,4 +1,4 @@
-﻿namespace WeatherForecastApp.WebApi.Responses
+﻿namespace WeatherForecastApp.Persistence.Responses
 {
     /// <summary>
     /// A generic repository command response.

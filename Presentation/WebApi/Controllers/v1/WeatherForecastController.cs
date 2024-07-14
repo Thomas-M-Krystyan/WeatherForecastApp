@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using WeatherForecastApp.WebApi.Controllers.Base;
+using WeatherForecastApp.Persistence.Controllers.Base;
 
-namespace WeatherForecastApp.WebApi.Controllers.v1
+namespace WeatherForecastApp.Persistence.Controllers.v1
 {
     /// <summary>
     /// Main functionalities of the Weather Forecast App.

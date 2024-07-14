@@ -1,6 +1,6 @@
 ﻿using WeatherForecastApp.Persistence.Properties;
 
-namespace WeatherForecastApp.WebApi.Responses
+namespace WeatherForecastApp.Persistence.Responses
 {
     /// <summary>
     /// <inheritdoc cref="QueryCommandResult"/>

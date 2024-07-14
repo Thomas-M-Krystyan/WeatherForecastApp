@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeatherForecastApp.WebApi.Properties {
+namespace WeatherForecastApp.Persistence.Properties {
     using System;
     
     

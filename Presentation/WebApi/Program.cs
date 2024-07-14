@@ -11,8 +11,8 @@ using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Resolvers;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Persistence.Context;
-using WeatherForecastApp.WebApi.Constants;
-using WeatherForecastApp.WebApi.Properties;
+using WeatherForecastApp.Persistence.Constants;
+using WeatherForecastApp.Persistence.Properties;
 
 namespace WebApi
 {
