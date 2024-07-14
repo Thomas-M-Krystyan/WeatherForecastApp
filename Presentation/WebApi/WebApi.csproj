@@ -18,6 +18,9 @@
     <!-- Docker -->
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    
+    <!-- Secrets -->
+    <UserSecretsId>8a0fbbff-5201-4288-906a-be9115957e5d</UserSecretsId>
   </PropertyGroup>
 
   <!-- NuGet packages -->
