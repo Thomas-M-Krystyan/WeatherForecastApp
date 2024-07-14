@@ -84,11 +84,9 @@ namespace WebApi
         {
             WebApplication app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI(option =>
+                option.SwaggerEndpoint($"/swagger/{Resource.Swagger_Version}/swagger.json", nameof(WeatherForecastApp)));
 
             app.UseAuthorization();
 
