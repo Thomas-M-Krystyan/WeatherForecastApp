@@ -12,7 +12,7 @@
 
   <!-- Exposition to external projects -->
   <ItemGroup>
-    <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>  <!-- Visibility of members to ProxyFactory from Moq -->
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>  <!-- Visibility of internal members to ProxyFactory from Moq -->
     <InternalsVisibleTo Include="WeatherForecastApp.Domain.Tests"/>
   </ItemGroup>
 
