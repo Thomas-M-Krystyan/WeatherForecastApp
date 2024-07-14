@@ -2,7 +2,6 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
@@ -59,11 +58,11 @@ namespace WebApi
             });
 
             // Version of the application
-            builder.Services.AddApiVersioning(config =>
+            builder.Services.AddApiVersioning(options =>
             {
-                config.DefaultApiVersion = new ApiVersion(ApiCommonValues.Version.Default);
-                config.AssumeDefaultVersionWhenUnspecified = true;
-                config.ReportApiVersions = true;
+                options.DefaultApiVersion = new ApiVersion(ApiCommonValues.Version.Default);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
             });
 
             return builder;
