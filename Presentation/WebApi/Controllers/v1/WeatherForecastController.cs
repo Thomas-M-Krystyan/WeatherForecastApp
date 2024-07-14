@@ -21,7 +21,7 @@ namespace WeatherForecastApp.WebApi.Controllers.v1
         /// </summary>
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            this._logger = logger;
         }
 
         [HttpGet]

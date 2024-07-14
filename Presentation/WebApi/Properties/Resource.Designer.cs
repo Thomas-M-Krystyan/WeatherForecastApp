@@ -61,6 +61,33 @@ namespace WeatherForecastApp.WebApi.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The operation wasn&apos;t successful. Errors encountered..
+        /// </summary>
+        internal static string RESPONSE_Command_Failure_Error {
+            get {
+                return ResourceManager.GetString("RESPONSE_Command_Failure_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation wasn&apos;t successful. Nothing was changed..
+        /// </summary>
+        internal static string RESPONSE_Command_Failure_NotChanged {
+            get {
+                return ResourceManager.GetString("RESPONSE_Command_Failure_NotChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The operation was successful. The change was saved..
+        /// </summary>
+        internal static string RESPONSE_Command_Success {
+            get {
+                return ResourceManager.GetString("RESPONSE_Command_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The application used to store and display weather forecasts..
         /// </summary>
         internal static string Swagger_Description {

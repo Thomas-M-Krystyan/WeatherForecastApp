@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WeatherForecastApp.Application.Responses;
 
 namespace WeatherForecastApp.Application.Repository
 {
@@ -12,7 +14,7 @@ namespace WeatherForecastApp.Application.Repository
     /// </para>
     /// </summary>
     /// <typeparam name="TRepository">The type of a repository.</typeparam>
-    public interface IRepositoryContext<TRepository>
+    public interface IRepositoryContext<TRepository> : IDisposable
         where TRepository : class, IQueryable, IEnumerable
     {
         /// <summary>
@@ -25,8 +27,8 @@ namespace WeatherForecastApp.Application.Repository
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>
-        /// The number of affected rows.
+        /// The status of the ACID operation.
         /// </returns>
-        public Task<int> SaveChangesAsync(CancellationToken? cancellationToken = default);
+        public Task<QueryResult> SaveChangesAsync(CancellationToken? cancellationToken = default);
     }
 }

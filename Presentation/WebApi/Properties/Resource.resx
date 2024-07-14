@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="RESPONSE_Command_Failure_Error" xml:space="preserve">
+    <value>The operation wasn't successful. Errors encountered.</value>
+    <comment>Command (generic)</comment>
+  </data>
+  <data name="RESPONSE_Command_Failure_NotChanged" xml:space="preserve">
+    <value>The operation wasn't successful. Nothing was changed.</value>
+    <comment>Command (generic)</comment>
+  </data>
+  <data name="RESPONSE_Command_Success" xml:space="preserve">
+    <value>The operation was successful. The change was saved.</value>
+    <comment>Command (generic)</comment>
+  </data>
   <data name="Swagger_Description" xml:space="preserve">
     <value>The application used to store and display weather forecasts.</value>
+    <comment>Swagger UI</comment>
   </data>
   <data name="Swagger_Title" xml:space="preserve">
     <value>Weather Forecast App</value>
+    <comment>Swagger UI</comment>
   </data>
   <data name="Swagger_Version" xml:space="preserve">
     <value>v1</value>
+    <comment>Swagger UI</comment>
   </data>
 </root>

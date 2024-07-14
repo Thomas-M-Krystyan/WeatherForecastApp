@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Repository;
+using WeatherForecastApp.Application.Responses;
 using WeatherForecastApp.Domain.Models;
 
 namespace WeatherForecastApp.Persistence.Context
@@ -10,8 +12,6 @@ namespace WeatherForecastApp.Persistence.Context
     /// <inheritdoc cref="IRepositoryContext{IRepository}"/>
     /// Implemented as a <see cref="WeatherForecastEntity"/> SQL database.
     /// </summary>
-    /// <seealso cref="DbContext"/>
-    /// <seealso cref="IRepositoryContext{TRepository}"/>
     public sealed class WeatherForecastContext : DbContext, IRepositoryContext<DbSet<WeatherForecastEntity>>
     {
         /// <inheritdoc cref="IRepositoryContext{TRepository}.Entities"/>
@@ -26,9 +26,17 @@ namespace WeatherForecastApp.Persistence.Context
         }
 
         /// <inheritdoc cref="IRepositoryContext{TRepository}.SaveChangesAsync(CancellationToken?)"/>
-        public async Task<int> SaveChangesAsync(CancellationToken? cancellationToken)
+        public async Task<QueryResult> SaveChangesAsync(CancellationToken? cancellationToken)
         {
-            return await base.SaveChangesAsync(cancellationToken ?? CancellationToken.None);
+            int changesCount = await base.SaveChangesAsync(cancellationToken ?? CancellationToken.None);
+
+            return new QueryResult(changesCount > 0, changesCount);
+        }
+
+        /// <inheritdoc cref="DbContext.Dispose()"/>
+        void IDisposable.Dispose()
+        {
+            base.Dispose();
         }
     }
 }

@@ -2,7 +2,7 @@
 using WeatherForecastApp.Domain.Models.Units;
 using WeatherForecastApp.Domain.Models.Units.Interfaces;
 
-namespace WeatherForecastApp.Domain.Models
+namespace WeatherForecastApp.Domain.Models.DTOs
 {
     /// <summary>
     /// The basic weather forecast domain model.

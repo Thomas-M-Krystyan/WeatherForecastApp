@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WeatherForecastApp.Domain.Constants;
+using WeatherForecastApp.Domain.Models.DTOs;
 
 namespace WeatherForecastApp.Domain.Models
 {
