@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Repository;
@@ -14,8 +13,6 @@ namespace WeatherForecastApp.Persistence.Context
     /// </summary>
     public sealed class WeatherForecastContext : DbContext, IRepositoryContext<DbSet<WeatherForecastEntity>>
     {
-        private bool _isDisposed;
-
         /// <inheritdoc cref="IRepositoryContext{TRepository}.Entities"/>
         public DbSet<WeatherForecastEntity> Entities { get; set; } = null!;
 
@@ -33,24 +30,6 @@ namespace WeatherForecastApp.Persistence.Context
             int changesCount = await base.SaveChangesAsync(cancellationToken ?? CancellationToken.None);
 
             return new QueryResult(changesCount > 0, changesCount);
-        }
-
-        /// <inheritdoc cref="DbContext.Dispose()"/>
-        void IDisposable.Dispose()
-        {
-            Dispose(true);
-
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (!this._isDisposed && disposing)
-            {
-                base.Dispose();
-
-                this._isDisposed = true;
-            }
         }
     }
 }

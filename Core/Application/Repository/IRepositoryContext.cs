@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace WeatherForecastApp.Application.Repository
     /// </para>
     /// </summary>
     /// <typeparam name="TRepository">The type of a repository.</typeparam>
-    public interface IRepositoryContext<TRepository> : IDisposable
+    public interface IRepositoryContext<TRepository>
         where TRepository : class, IQueryable, IEnumerable
     {
         /// <summary>
