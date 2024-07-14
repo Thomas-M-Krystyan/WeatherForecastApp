@@ -1,9 +1,9 @@
 ﻿namespace WeatherForecastApp.Domain.Enums
 {
     /// <summary>
-    /// Predefined descriptions of the temperature aspect of the weather.
+    /// Predefined human-friendly descriptions of the "feeling temperature" aspect of the weather.
     /// </summary>
-    public enum TemperatureDescriptions
+    public enum FeelingTemperature
     {
         Unknown = 0,
 
