@@ -1,7 +1,7 @@
 ﻿namespace WeatherForecastApp.Domain.Constants
 {
     /// <summary>
-    /// Common compile-time values used accross the solution.
+    /// Common, compile-time values used accross the solution.
     /// </summary>
     public static class CommonValues
     {
@@ -16,11 +16,20 @@
         }
 
         /// <summary>
-        /// They names (keys) of environment variables.
+        /// The names (keys) of environment variables.
         /// </summary>
         public static class EnvironmentVariables
         {
             public const string ConnectionString = "CONNECTION_STRING";
+        }
+
+        /// <summary>
+        /// Version of the application.
+        /// </summary>
+        public static class Version
+        {
+            public const ushort Major = 1;
+            public const ushort Minor = 0;
         }
     }
 }

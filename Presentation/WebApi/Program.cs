@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -54,6 +55,14 @@ namespace WebApi
                     Title = Resource.Swagger_Title,
                     Description = Resource.Swagger_Description,
                 });
+            });
+
+            // Version of the application
+            builder.Services.AddApiVersioning(config =>
+            {
+                config.DefaultApiVersion = new ApiVersion(CommonValues.Version.Major, CommonValues.Version.Minor);
+                config.AssumeDefaultVersionWhenUnspecified = true;
+                config.ReportApiVersions = true;
             });
 
             return builder;
