@@ -9,6 +9,7 @@ using WeatherForecastApp.Domain.Models.Units;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Domain.Respones;
 using WeatherForecastApp.Domain.Validators;
+using WeatherForecastApp.WebApi.Enums;
 using WeatherForecastApp.WebApi.Models.DTOs;
 
 namespace WeatherForecastApp.WebApi.Handlers
@@ -48,7 +49,7 @@ namespace WeatherForecastApp.WebApi.Handlers
                 TemperatureCelsius tempCelsiusUnit = new(dto.Temperature);
 
                 forecast = new(
-                    date: utcConverter.ConvertFrom(dto.DateTime),  // NOTE: Ensures to always store time in the database in UTC format
+                    date: utcConverter.ConvertFrom(dto.Date.ToDateTime(default)),  // NOTE: Ensures to always store time in the database in UTC format
                     tempC: dto.Temperature,
                     tempF: tempConverter.ConvertFrom(tempCelsiusUnit).Value,
                     description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
@@ -59,7 +60,7 @@ namespace WeatherForecastApp.WebApi.Handlers
                 TemperatureCelsius tempCelsiusUnit = tempConverter.ConvertBack(tempFahrenheitUnit);
 
                 forecast = new(
-                    date: utcConverter.ConvertFrom(dto.DateTime),  // NOTE: Ensures to always store time in the database in UTC format
+                    date: utcConverter.ConvertFrom(dto.Date.ToDateTime(default)),  // NOTE: Ensures to always store time in the database in UTC format
                     tempC: tempCelsiusUnit.Value,
                     tempF: dto.Temperature,
                     description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());

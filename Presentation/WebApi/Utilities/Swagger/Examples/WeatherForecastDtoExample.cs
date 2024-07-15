@@ -1,5 +1,7 @@
 ﻿using Swashbuckle.AspNetCore.Filters;
+using System;
 using System.Diagnostics.CodeAnalysis;
+using WeatherForecastApp.WebApi.Enums;
 using WeatherForecastApp.WebApi.Models.DTOs;
 
 namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
@@ -13,7 +15,7 @@ namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
         {
             return new WeatherForecastDto
             {
-                DateTime = System.DateTime.UtcNow,
+                Date = DateOnly.FromDateTime(DateTime.UtcNow),
                 Temperature = 25.0f,
                 Scale = TemperatureScales.Celsius
             };

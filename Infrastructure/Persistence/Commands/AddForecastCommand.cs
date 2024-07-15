@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Commands;
@@ -38,7 +39,7 @@ namespace WeatherForecastApp.Persistence.Commands
                 // Preparing a repository entity
                 WeatherForecastEntity entity = new()
                 {
-                    DateTime = model.DateTime,
+                    Date = DateOnly.FromDateTime(model.DateTime),
                     TempCelsius = model.TempCelsius.Value,
                     Description = model.Description
                 };

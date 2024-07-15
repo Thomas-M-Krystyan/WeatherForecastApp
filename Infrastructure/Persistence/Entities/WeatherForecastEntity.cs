@@ -14,7 +14,7 @@ namespace WeatherForecastApp.Domain.Models
     {
         /// <inheritdoc cref="WeatherForecast.DateTime"/>
         [Key]
-        public DateTime DateTime { get; set; }
+        public DateOnly Date { get; set; }
 
         /// <inheritdoc cref="WeatherForecast.TempCelsius"/>
         [Required]
