@@ -19,28 +19,34 @@ namespace WeatherForecastApp.Application.Responses
         public int ChangesCount { get; }
 
         /// <summary>
-        /// A message summarizing the result of the operation.
+        /// A content summarizing the result of the operation.
         /// </summary>
-        public string Message { get; }
+        public string Content { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryCommandResult"/> class.
         /// </summary>
         /// <param name="isSuccess"><inheritdoc cref="IsSuccess" path="/summary"/></param>
         /// <param name="changesCount"><inheritdoc cref="ChangesCount" path="/summary"/></param>
-        /// <param name="message"><inheritdoc cref="Message" path="/summary"/></param>
-        private QueryCommandResult(bool isSuccess, int changesCount, string message)
+        /// <param name="content"><inheritdoc cref="Content" path="/summary"/></param>
+        private QueryCommandResult(bool isSuccess, int changesCount, string content)
         {
             this.IsSuccess = isSuccess;
             this.ChangesCount = changesCount;
-            this.Message = message;
+            this.Content = content;
         }
 
         /// <summary>
         /// The feedback for successful operation.
         /// </summary>
+        /// <param name="changesCount"><inheritdoc cref="ChangesCount" path="/summary"/></param>
         public static QueryCommandResult Success(int changesCount)
             => new QueryCommandResult(true, changesCount, $"{Resource.RESPONSE_Command_Success} {changesCount}");
+
+        /// <inheritdoc cref="Success(int)"/>
+        /// <param name="results"><inheritdoc cref="Content" path="/summary"/></param>
+        public static QueryCommandResult Success(params object[] results)
+            => new QueryCommandResult(true, results.Length, string.Join(", ", results));
 
         /// <summary>
         /// The feedback for failed operation.
@@ -49,7 +55,7 @@ namespace WeatherForecastApp.Application.Responses
             => new QueryCommandResult(false, 0, Resource.RESPONSE_Command_Failure_NotChanged);
 
         /// <inheritdoc cref="Failure()"/>
-        /// <param name="message">The result message (e.g., from validation).</param>
+        /// <param name="message"><inheritdoc cref="Content" path="/summary"/></param>
         public static QueryCommandResult Failure(string message)
             => new QueryCommandResult(false, 0, message);
 
@@ -62,6 +68,6 @@ namespace WeatherForecastApp.Application.Responses
         /// <summary>
         /// Displays human-friendly result summary.
         /// </summary>
-        public override string ToString() => this.Message;
+        public override string ToString() => this.Content;
     }
 }

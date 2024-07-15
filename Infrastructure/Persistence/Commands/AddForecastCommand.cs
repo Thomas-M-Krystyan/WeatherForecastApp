@@ -14,7 +14,7 @@ namespace WeatherForecastApp.Persistence.Commands
     /// <summary>
     /// <inheritdoc cref="IQueryCommand{TEntity, TModel}"/>
     /// <para>
-    /// Adds new weather forecast to the repository.
+    /// Adds a single new weather forecast to the repository.
     /// </para>
     /// </summary>
     public sealed class AddForecastCommand : IQueryCommand<WeatherForecastEntity, WeatherForecast>

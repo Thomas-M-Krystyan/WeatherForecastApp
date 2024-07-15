@@ -87,6 +87,7 @@ namespace WebApi
             return builder;
         }
 
+        // TODO: Introduce generic registration of Scoped or Transient services, not only Singletons
         private static WebApplicationBuilder RegisterInternalServices(this WebApplicationBuilder builder)
         {
             // Resolvers
@@ -98,9 +99,11 @@ namespace WebApi
 
             // Handlers
             builder.Services.AddScoped<AddForecastCommandHandler>();
+            builder.Services.AddScoped<GetWeeklyForecastCommandHandler>();
 
             // Commands
             builder.Services.AddScoped<AddForecastCommand>();
+            builder.Services.AddScoped<GetWeeklyForecastCommand>();
 
             return builder;
         }

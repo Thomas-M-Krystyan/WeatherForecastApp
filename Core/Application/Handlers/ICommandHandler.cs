@@ -1,36 +1,28 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using WeatherForecastApp.Application.Commands;
-using WeatherForecastApp.Application.Entities;
 using WeatherForecastApp.Application.Responses;
 
 namespace WeatherForecastApp.Application.Handlers
 {
     /// <summary>
-    /// A generic query handler performing atomic operations associated with commands.
+    /// A generic query handler setting up and performing atomic operations associated with commands.
     /// </summary>
-    /// <typeparam name="TEntity">The type of the entity model.</typeparam>
-    /// <typeparam name="TModel">The type of the domain model.</typeparam>
-    /// <typeparam name="TDto">The type of the DTO model.</typeparam>
+    /// <typeparam name="TData">The type of the DTO model.</typeparam>
     /// <remarks>
     /// NOTE: The idea behind this structure is to implement mediator design pattern or mimic MediatR library - but without
     ///       introducing a heavy, unnecessary third-party dependencies and losing control over the infratructure workflow.
     /// </remarks>
-    public interface ICommandHandler<TEntity, TModel, TDto>
-        where TEntity : class, IRepositoryEntity
-        where TModel : struct
-        where TDto : struct
+    public interface ICommandHandler<TData>
+        where TData : struct
     {
         /// <summary>
-        /// Resolves and executes the <typeparamref name="TCommand"/>.
+        /// Resolves and executes the dedicated command.
         /// </summary>
-        /// <typeparam name="TCommand">The type of the command.</typeparam>
-        /// <param name="dto">The Data Transfer Object (DTO) to be passed.</param>
+        /// <param name="data">The data to be passed to the command.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>
-        /// The response from the executed <typeparamref name="TCommand"/> operation.
+        /// The response from the command operation.
         /// </returns>
-        public Task<QueryCommandResult> HandleAsync<TCommand>(TDto dto, CancellationToken cancellationToken)
-            where TCommand : class, IQueryCommand<TEntity, TModel>;
+        public Task<QueryCommandResult> HandleAsync(TData data, CancellationToken cancellationToken);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using WeatherForecastApp.Application.Commands;
 using WeatherForecastApp.Application.Handlers;
 using WeatherForecastApp.Application.Responses;
 using WeatherForecastApp.Domain.Converters;
@@ -9,18 +8,19 @@ using WeatherForecastApp.Domain.Models.Units;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Domain.Respones;
 using WeatherForecastApp.Domain.Validators;
+using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.WebApi.Enums;
 using WeatherForecastApp.WebApi.Models.DTOs;
 
 namespace WeatherForecastApp.WebApi.Handlers
 {
     /// <summary>
-    /// <inheritdoc cref="ICommandHandler{TEntity, TModel, TDto}"/>
+    /// <inheritdoc cref="ICommandHandler{TData}"/>
     /// <para>
     /// Handles adding single weather forecast to the repository.
     /// </para>
     /// </summary>
-    internal sealed class AddForecastCommandHandler : ICommandHandler<WeatherForecastEntity, WeatherForecast, WeatherForecastDto>
+    internal sealed class AddForecastCommandHandler : ICommandHandler<WeatherForecastDto>
     {
         private readonly IServiceResolver _serviceResolver;
 
@@ -32,9 +32,8 @@ namespace WeatherForecastApp.WebApi.Handlers
             this._serviceResolver = serviceResolver;
         }
 
-        /// <inheritdoc cref="ICommandHandler{TEntity, TModel, TDto}.HandleAsync{TCommand}(TDto, CancellationToken)"/>
-        public async Task<QueryCommandResult> HandleAsync<TCommand>(WeatherForecastDto dto, CancellationToken cancellationToken)
-            where TCommand : class, IQueryCommand<WeatherForecastEntity, WeatherForecast>
+        /// <inheritdoc cref="ICommandHandler{TData}.HandleAsync(TData, CancellationToken)"/>
+        public async Task<QueryCommandResult> HandleAsync(WeatherForecastDto dto, CancellationToken cancellationToken)
         {
             // Converters
             DateTimeConverterLocalUtc utcConverter = this._serviceResolver.Resolve<DateTimeConverterLocalUtc>();
@@ -76,7 +75,7 @@ namespace WeatherForecastApp.WebApi.Handlers
             }
 
             // Command
-            TCommand command = this._serviceResolver.Resolve<TCommand>();
+            AddForecastCommand command = this._serviceResolver.Resolve<AddForecastCommand>();
             
             return await command.ExecuteAsync(forecast, cancellationToken);
         }

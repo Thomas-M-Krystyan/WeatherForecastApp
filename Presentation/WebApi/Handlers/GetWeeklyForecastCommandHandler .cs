@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using WeatherForecastApp.Application.Commands;
 using WeatherForecastApp.Application.Handlers;
 using WeatherForecastApp.Application.Responses;
-using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Domain.Respones;
 using WeatherForecastApp.Domain.Validators;
+using WeatherForecastApp.Persistence.Commands;
 
 namespace WeatherForecastApp.WebApi.Handlers
 {
     /// <summary>
-    /// <inheritdoc cref="ICommandHandler{TEntity, TModel, TDto}"/>
+    /// <inheritdoc cref="ICommandHandler{TData}"/>
     /// <para>
     /// Handles querying a weekly weather forecast from the repository.
     /// </para>
     /// </summary>
-    internal sealed class GetWeeklyForecastCommandHandler : ICommandHandler<WeatherForecastEntity, DateTime, DateOnly>
+    internal sealed class GetWeeklyForecastCommandHandler : ICommandHandler<DateOnly>
     {
         private readonly IServiceResolver _serviceResolver;
 
@@ -29,16 +28,12 @@ namespace WeatherForecastApp.WebApi.Handlers
             this._serviceResolver = serviceResolver;
         }
 
-        /// <inheritdoc cref="ICommandHandler{TEntity, TModel, TDto}.HandleAsync{TCommand}(TDto, CancellationToken)"/>
-        public async Task<QueryCommandResult> HandleAsync<TCommand>(DateOnly startDate, CancellationToken cancellationToken)
-            where TCommand : class, IQueryCommand<WeatherForecastEntity, DateTime>
+        /// <inheritdoc cref="ICommandHandler{TData}.HandleAsync(TData, CancellationToken)"/>
+        public async Task<QueryCommandResult> HandleAsync(DateOnly startDate, CancellationToken cancellationToken)
         {
-            // Data
-            var dateTime = startDate.ToDateTime(default);
-
             // Validation
             DateValidator validator = this._serviceResolver.Resolve<DateValidator>();
-            ValidatorResponse validationResult = validator.Validate(dateTime);
+            ValidatorResponse validationResult = validator.Validate(startDate.ToDateTime(default));
 
             if (validationResult.IsInvalid)
             {
@@ -46,9 +41,9 @@ namespace WeatherForecastApp.WebApi.Handlers
             }
 
             // Command
-            TCommand command = this._serviceResolver.Resolve<TCommand>();
+            GetWeeklyForecastCommand command = this._serviceResolver.Resolve<GetWeeklyForecastCommand>();
 
-            return await command.ExecuteAsync(dateTime, cancellationToken);
+            return await command.ExecuteAsync(startDate, cancellationToken);
         }
     }
 }

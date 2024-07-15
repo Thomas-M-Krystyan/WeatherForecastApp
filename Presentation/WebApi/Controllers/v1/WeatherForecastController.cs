@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Responses;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Domain.Utilities;
-using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.Persistence.Controllers.Base;
 using WeatherForecastApp.WebApi.Handlers;
 using WeatherForecastApp.WebApi.Models.DTOs;
@@ -24,16 +24,16 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
     [Route("api/v1/[controller]")]
     public sealed class WeatherForecastController : BaseApiController
     {
-        private readonly ILogger<WeatherForecastController> _logger;
         private readonly IServiceResolver _serviceResolver;
+        private readonly ILogger<WeatherForecastController> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WeatherForecastController"/> class.
         /// </summary>
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IServiceResolver serviceResolver)
+        public WeatherForecastController(IServiceResolver serviceResolver, ILogger<WeatherForecastController> logger)
         {
-            this._logger = logger;
             this._serviceResolver = serviceResolver;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
                 AddForecastCommandHandler handler = this._serviceResolver.Resolve<AddForecastCommandHandler>();
-                QueryCommandResult queryResult = await handler.HandleAsync<AddForecastCommand>(dto, cancellationToken);
+                QueryCommandResult queryResult = await handler.HandleAsync(dto, cancellationToken);
 
                 return queryResult.IsSuccess
                     ? Ok(queryResult.ToString())
@@ -61,24 +61,23 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         }
 
         /// <summary>
-        /// Gets weather forecast for a week (starting from a provided date).
+        /// Gets weather forecast for up to a week (starting from a provided date).
         /// </summary>
         /// <param name="startDate">The date from which one week will be counted.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         [HttpGet]
         [Route("GetWeeklyForecast")]
         public async Task<IActionResult> GetWeeklyForecastAsync(
-            [Required, FromBody] DateOnly startDate, CancellationToken cancellationToken)
+            [Required, DefaultValue("2024-07-15")] DateOnly startDate, CancellationToken cancellationToken)
         {
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
-                return Ok();
-                //AddForecastCommandHandler handler = this._serviceResolver.Resolve<AddForecastCommandHandler>();
-                //QueryCommandResult queryResult = await handler.HandleAsync<AddForecastCommand>(dto, cancellationToken);
+                GetWeeklyForecastCommandHandler handler = this._serviceResolver.Resolve<GetWeeklyForecastCommandHandler>();
+                QueryCommandResult queryResult = await handler.HandleAsync(startDate, cancellationToken);
 
-                //return queryResult.IsSuccess
-                //    ? Ok(queryResult.ToString())
-                //    : BadRequest(queryResult.ToString());
+                return queryResult.IsSuccess
+                    ? Ok(queryResult.ToString())
+                    : BadRequest(queryResult.ToString());
             },
             UnprocessableEntity, this._logger);
         }
