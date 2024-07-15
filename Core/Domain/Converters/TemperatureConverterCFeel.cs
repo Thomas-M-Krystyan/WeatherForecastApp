@@ -14,7 +14,7 @@ namespace WeatherForecastApp.Domain.Converters
     /// Implements a converter between <see cref="TemperatureCelsius"/> and <see cref="FeelingTemperature"/>.
     /// </para>
     /// </summary>
-    internal sealed class TemperatureConverterCFeel : IUnitConverter<TemperatureCelsius, FeelingTemperature>
+    public sealed class TemperatureConverterCFeel : IUnitConverter<TemperatureCelsius, FeelingTemperature>
     {
         private const float AbsoluteZero = -273.15f;
 

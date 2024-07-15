@@ -18,14 +18,10 @@ namespace WeatherForecastApp.Domain.Converters
 
         /// <inheritdoc cref="IUnitConverter{TUnitA, TUnitB}.ConvertFrom(TUnitA)"/>
         public TemperatureFahrenheit ConvertFrom(TemperatureCelsius unit)
-        {
-            return new TemperatureFahrenheit(CelsiusToFahrenheit(unit.Value));
-        }
+            => new TemperatureFahrenheit(CelsiusToFahrenheit(unit.Value));
 
         /// <inheritdoc cref="IUnitConverter{TUnitA, TUnitB}.ConvertBack(TUnitB)"/>
         public TemperatureCelsius ConvertBack(TemperatureFahrenheit unit)
-        {
-            return new TemperatureCelsius(FahrenheitToCelsius(unit.Value));
-        }
+            => new TemperatureCelsius(FahrenheitToCelsius(unit.Value));
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WeatherForecastApp.Application.Entities;
 using WeatherForecastApp.Domain.Constants;
-using WeatherForecastApp.Domain.Models.DTOs;
-using WeatherForecastApp.Persistence.Entities.Interfaces;
 
 namespace WeatherForecastApp.Domain.Models
 {
@@ -11,7 +10,7 @@ namespace WeatherForecastApp.Domain.Models
     /// The SQL database entity corresponding to <see cref="WeatherForecast"/> domain model.
     /// </summary>
     [Table(nameof(WeatherForecast))]
-    public sealed class WeatherForecastEntity : IRepositoryEntity
+    public sealed record WeatherForecastEntity : IRepositoryEntity
     {
         /// <inheritdoc cref="WeatherForecast.DateTime"/>
         [Key]

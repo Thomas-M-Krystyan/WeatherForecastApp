@@ -2,7 +2,7 @@
 using WeatherForecastApp.Domain.Models.Units;
 using WeatherForecastApp.Domain.Models.Units.Interfaces;
 
-namespace WeatherForecastApp.Domain.Models.DTOs
+namespace WeatherForecastApp.Domain.Models
 {
     /// <summary>
     /// The basic weather forecast domain model.
@@ -15,12 +15,12 @@ namespace WeatherForecastApp.Domain.Models.DTOs
         public DateTime DateTime { get; }
 
         /// <summary>
-        /// The temperature in C°.
+        /// The temperature in °C.
         /// </summary>
         public IUnit<float> TempCelsius { get; }
 
         /// <summary>
-        /// The temperature in F°.
+        /// The temperature in °F.
         /// </summary>
         public IUnit<float> TempFahrenheit { get; }
 

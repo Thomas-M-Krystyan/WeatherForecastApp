@@ -3,16 +3,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.IO;
-using WeatherForecastApp.Application.Repository;
 using WeatherForecastApp.Domain.Constants;
-using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Resolvers;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
-using WeatherForecastApp.Persistence.Context;
+using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.Persistence.Constants;
+using WeatherForecastApp.Persistence.Context;
 using WeatherForecastApp.Persistence.Properties;
+using WeatherForecastApp.WebApi.Examples;
+using WeatherForecastApp.WebApi.Handlers;
 
 namespace WebApi
 {
@@ -43,6 +45,9 @@ namespace WebApi
             // Swagger UI
             builder.Services.AddSwaggerGen(options =>
             {
+                // Enable [SwaggerRequestExample] filter for parameters in Swagger UI
+                options.ExampleFilters();
+
                 // Mapping XML documentation
                 string applicationDirectory = AppContext.BaseDirectory;
                 string applicationDocName = $"{nameof(WeatherForecastApp)}.{nameof(WebApi)}.xml";
@@ -57,6 +62,9 @@ namespace WebApi
                 });
             });
 
+            // Swagger UI: Examples (showing custom values of API parameters instead of the default ones)
+            builder.Services.AddSwaggerExamplesFromAssemblyOf<WeatherForecastDtoExample>();
+
             // Version of the application
             builder.Services.AddApiVersioning(options =>
             {
@@ -70,12 +78,18 @@ namespace WebApi
 
         private static WebApplicationBuilder RegisterInternalServices(this WebApplicationBuilder builder)
         {
-            // Repository
-            builder.Services.AddScoped<IRepositoryContext<DbSet<WeatherForecastEntity>>, WeatherForecastContext>();
-
             // Resolvers
             builder.Services.AddSingleton<IServiceHandler, ServiceHandler>();
             builder.Services.AddSingleton<IServiceResolver, ServiceResolver>();
+
+            // Repositories
+            builder.Services.AddScoped<WeatherForecastContext>();
+
+            // Handlers
+            builder.Services.AddSingleton<ForecastCommandHandler>();
+
+            // Commands
+            builder.Services.AddSingleton<AddForecastCommand>();
 
             return builder;
         }

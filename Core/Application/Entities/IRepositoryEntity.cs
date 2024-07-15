@@ -1,4 +1,4 @@
-﻿namespace WeatherForecastApp.Persistence.Entities.Interfaces
+﻿namespace WeatherForecastApp.Application.Entities
 {
     /// <summary>
     /// An interface used to distinguish repository entities.

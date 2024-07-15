@@ -20,10 +20,22 @@
         /// </summary>
         /// <param name="isSuccess"><inheritdoc cref="IsSuccess" path="/summary"/></param>
         /// <param name="changesCount"><inheritdoc cref="ChangesCount" path="/summary"/></param>
-        public QueryResult(bool isSuccess, int changesCount)
+        private QueryResult(bool isSuccess, int changesCount)
         {
             this.IsSuccess = isSuccess;
             this.ChangesCount = changesCount;
         }
+
+        /// <summary>
+        /// The feedback for successful query.
+        /// </summary>
+        public static QueryResult Success(int changesCount)
+            => new QueryResult(true, changesCount);
+
+        /// <summary>
+        /// The feedback for failed query.
+        /// </summary>
+        public static QueryResult Failure()
+            => new QueryResult(false, 0);
     }
 }

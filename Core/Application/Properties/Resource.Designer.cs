@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeatherForecastApp.Persistence.Properties {
+namespace WeatherForecastApp.Application.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WeatherForecastApp.Persistence.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WeatherForecastApp.Persistence.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WeatherForecastApp.Application.Properties.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,7 +79,7 @@ namespace WeatherForecastApp.Persistence.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The operation was successful. The change was saved..
+        ///   Looks up a localized string similar to The operation was successful. Number of changes:.
         /// </summary>
         internal static string RESPONSE_Command_Success {
             get {

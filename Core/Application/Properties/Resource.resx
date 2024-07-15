@@ -126,7 +126,7 @@
     <comment>Command (generic)</comment>
   </data>
   <data name="RESPONSE_Command_Success" xml:space="preserve">
-    <value>The operation was successful. The change was saved.</value>
+    <value>The operation was successful. Number of changes:</value>
     <comment>Command (generic)</comment>
   </data>
 </root>

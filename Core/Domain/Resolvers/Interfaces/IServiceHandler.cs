@@ -21,9 +21,7 @@ namespace WeatherForecastApp.Domain.Resolvers.Interfaces
         ///   <see langword="true"/> if the service was retrieved from the cache; otherwise, <see langword="false"/>.
         /// </returns>
         public bool GetCachedService<TService>(out object cachedService)
-        {
-            return this.CachedServices.TryGetValue(nameof(TService), out cachedService);
-        }
+            => this.CachedServices.TryGetValue(nameof(TService), out cachedService);
 
         /// <summary>
         /// Creates the given service.
@@ -34,9 +32,7 @@ namespace WeatherForecastApp.Domain.Resolvers.Interfaces
         /// </returns>
         public TService CreateService<TService>()
             where TService : class
-        {
-            return Activator.CreateInstance<TService>();
-        }
+            => Activator.CreateInstance<TService>();  // TODO: Handle objects without parameterless constructors
 
         /// <summary>
         /// Caches the given service in the internal <see cref="IServiceHandler"/> cache.
@@ -45,8 +41,6 @@ namespace WeatherForecastApp.Domain.Resolvers.Interfaces
         /// <param name="service">The service to be cached.</param>
         public void CacheService<TService>(TService service)
             where TService : class
-        {
-            this.CachedServices.TryAdd(nameof(TService), service);
-        }
+            => this.CachedServices.TryAdd(nameof(TService), service);
     }
 }

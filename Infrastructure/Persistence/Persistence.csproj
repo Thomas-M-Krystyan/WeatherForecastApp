@@ -27,19 +27,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\Application.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Properties\Resource.Designer.cs">
-      <DependentUpon>Resource.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resource.resx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
 
 </Project>

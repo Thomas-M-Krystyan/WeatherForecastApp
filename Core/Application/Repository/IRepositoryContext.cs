@@ -13,6 +13,10 @@ namespace WeatherForecastApp.Application.Repository
     /// </para>
     /// </summary>
     /// <typeparam name="TRepository">The type of a repository.</typeparam>
+    /// <remarks>
+    /// NOTE: The idea behind this structure is to implement repository design pattern and separate the
+    ///       application layers where the Data Access Object (DAO) and core business logic are located.
+    /// </remarks>
     public interface IRepositoryContext<TRepository>
         where TRepository : class, IQueryable, IEnumerable
     {
