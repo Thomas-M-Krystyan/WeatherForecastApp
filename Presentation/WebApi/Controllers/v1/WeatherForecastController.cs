@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,6 +56,29 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
                 return queryResult.IsSuccess
                     ? Ok(queryResult.ToString())
                     : BadRequest(queryResult.ToString());
+            },
+            UnprocessableEntity, this._logger);
+        }
+
+        /// <summary>
+        /// Gets weather forecast for a week (starting from a provided date).
+        /// </summary>
+        /// <param name="startDate">The date from which one week will be counted.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        [HttpGet]
+        [Route("GetWeeklyForecast")]
+        public async Task<IActionResult> GetWeeklyForecastAsync(
+            [Required, FromBody] DateOnly startDate, CancellationToken cancellationToken)
+        {
+            return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
+            {
+                return Ok();
+                //ForecastCommandHandler handler = this._serviceResolver.Resolve<ForecastCommandHandler>();
+                //QueryCommandResult queryResult = await handler.HandleAsync<AddForecastCommand>(dto, cancellationToken);
+
+                //return queryResult.IsSuccess
+                //    ? Ok(queryResult.ToString())
+                //    : BadRequest(queryResult.ToString());
             },
             UnprocessableEntity, this._logger);
         }
