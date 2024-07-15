@@ -14,11 +14,13 @@ namespace WeatherForecastApp.Domain.Models
     {
         /// <inheritdoc cref="WeatherForecast.DateTime"/>
         [Key]
+        [Column(nameof(Date), Order = 0)]
         public DateOnly Date { get; set; }
 
         /// <inheritdoc cref="WeatherForecast.TempCelsius"/>
         [Required]
         [Range(CommonValues.Database.MinAllowedTemp, CommonValues.Database.MaxAllowedTemp)]
+        [Column(Order = 1)]
         public float TempCelsius { get; set; }
 
         // NOTE: To save some space in the database only one temperature unit is
@@ -27,6 +29,7 @@ namespace WeatherForecastApp.Domain.Models
         /// <inheritdoc cref="WeatherForecast.Description"/>
         [Required]
         [StringLength(CommonValues.Database.MaxAllowedTextLength)]
+        [Column(Order = 2)]
         public string Description { get; set; } = string.Empty;
     }
 }
