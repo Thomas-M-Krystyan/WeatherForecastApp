@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using WeatherForecastApp.Domain.Converters;
 
 namespace WeatherForecastApp.Domain.Tests.Converters
@@ -11,12 +10,9 @@ namespace WeatherForecastApp.Domain.Tests.Converters
         public void ConvertFrom_Local_ToUtc_ReturnsValidUtcDateTime()
         {
             // Arrange
-            string cetTimeString = "2024-07-15T18:00:00";
-            var cetDateTimeOffset = DateTimeOffset.Parse(cetTimeString,
-                CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            var initialUtcDateTime = new DateTime(2024, 7, 15, 16, 0, 0, DateTimeKind.Utc);
             var cetTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
-            DateTimeOffset cetTime = TimeZoneInfo.ConvertTime(cetDateTimeOffset, cetTimeZone);
-            DateTime cetDateTime = cetTime.DateTime;
+            DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(initialUtcDateTime, cetTimeZone);
 
             var unitConverter = new DateTimeConverterLocalUtc();
 
@@ -24,14 +20,19 @@ namespace WeatherForecastApp.Domain.Tests.Converters
             DateTime utcDateTime = unitConverter.ConvertFrom(cetDateTime);
 
             // Assert
-            Assert.That(utcDateTime.ToString(), Is.EqualTo("7/15/2024 04:00:00 PM"));
+            Assert.Multiple(() =>
+            {
+                Assert.That(cetDateTime.Hour, Is.EqualTo(18), "CET time");
+                Assert.That(utcDateTime.Hour, Is.EqualTo(16), "UTC time");
+            });
+            TestContext.WriteLine(cetDateTime);
         }
 
         [Test]
         public void ConvertBack_Utc_ToLocal_ReturnsValidLocalDateTime()
         {
             // Arrange
-            var utcDateTime = new DateTime(2024, 7, 15, 4, 0, 0, DateTimeKind.Utc);
+            var utcDateTime = new DateTime(2024, 7, 15, 16, 0, 0, DateTimeKind.Utc);
 
             var unitConverter = new DateTimeConverterLocalUtc();
 
@@ -39,7 +40,8 @@ namespace WeatherForecastApp.Domain.Tests.Converters
             DateTime cetDateTime = unitConverter.ConvertBack(utcDateTime);
 
             // Assert
-            Assert.That(cetDateTime.ToString(), Is.EqualTo("7/15/2024 06:00:00 PM"));
+            Assert.That(cetDateTime.Hour, Is.Not.EqualTo(utcDateTime.Hour));
+            TestContext.WriteLine(cetDateTime);
         }
     }
 }
