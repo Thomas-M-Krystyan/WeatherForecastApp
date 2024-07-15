@@ -1,4 +1,5 @@
-﻿using WeatherForecastApp.Domain.Properties;
+﻿using System.Text.Json.Serialization;
+using WeatherForecastApp.Domain.Properties;
 
 namespace WeatherForecastApp.Domain.Respones
 {
@@ -15,6 +16,7 @@ namespace WeatherForecastApp.Domain.Respones
         /// <summary>
         /// The denying validation result.
         /// </summary>
+        [JsonIgnore]
         public bool IsInvalid => !this.IsValid;
 
         /// <summary>

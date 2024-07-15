@@ -13,6 +13,7 @@
   <!-- NuGet packages -->
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />  <!-- To be consistent with modern projects (default/preferred serializer) -->
   </ItemGroup>
   
   <!-- Exposition to external projects -->
