@@ -18,19 +18,34 @@ namespace WeatherForecastApp.Domain.Converters
     {
         private const float AbsoluteZero = -273.15f;
 
+        // -----------------------------------------------------
+        // From which Celsius degree certain temperature starts:
+        // -----------------------------------------------------
+        private const short Freezing   = (short)CommonValues.Database.MinAllowedTemp;
+        private const short Bracing    = 8;
+        private const short Chilly     = 12;
+        private const short Cool       = 17;
+        private const short Mild       = 20;  // Room temperature 20-22 °C
+        private const short Warm       = 22;
+        private const short Balmy      = 24;
+        private const short Hot        = 27;
+        private const short Sweltering = 30;
+        private const short Scorching  = 35;
+        private const short Melting    = (short)CommonValues.Database.MaxAllowedTemp;
+
         private static readonly Dictionary<FeelingTemperature, (short Min, short Max)> NameToTempsMap =
             new Dictionary<FeelingTemperature, (short, short)>()
         {
-            { FeelingTemperature.Freezing,   ((short)CommonValues.Database.MinAllowedTemp, -48) },
-            { FeelingTemperature.Bracing,    (-48, -36) },
-            { FeelingTemperature.Chilly,     (-36, -24) },
-            { FeelingTemperature.Cool,       (-24, -12) },
-            { FeelingTemperature.Mild,       (-12,   0) },
-            { FeelingTemperature.Warm,       (  0,  12) },
-            { FeelingTemperature.Balmy,      ( 12,  24) },
-            { FeelingTemperature.Hot,        ( 24,  36) },
-            { FeelingTemperature.Sweltering, ( 36,  48) },
-            { FeelingTemperature.Scorching,  ( 48,  (short)CommonValues.Database.MaxAllowedTemp) },
+            { FeelingTemperature.Freezing,   ( Freezing,  /* <=> */ Bracing) },
+            { FeelingTemperature.Bracing,    ( Bracing,   /* <=> */ Chilly) },
+            { FeelingTemperature.Chilly,     ( Chilly,    /* <=> */ Cool) },
+            { FeelingTemperature.Cool,       ( Cool,      /* <=> */ Mild) },
+            { FeelingTemperature.Mild,       ( Mild,      /* <=> */ Warm) },
+            { FeelingTemperature.Warm,       ( Warm,      /* <=> */ Balmy) },
+            { FeelingTemperature.Balmy,      ( Balmy,     /* <=> */ Hot) },
+            { FeelingTemperature.Hot,        ( Hot,       /* <=> */ Sweltering) },
+            { FeelingTemperature.Sweltering, ( Sweltering,/* <=> */ Scorching) },
+            { FeelingTemperature.Scorching,  ( Scorching, /* <=> */ Melting) },
         };
 
         /// <inheritdoc cref="IRandomGenerator"/>
