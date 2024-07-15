@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Validation_Failure_DateTimeLocal" xml:space="preserve">
-    <value>The date time should be in UTC format.</value>
+  <data name="Validation_Failure_DateLocal" xml:space="preserve">
+    <value>The date should be in UTC format.</value>
   </data>
-  <data name="Validation_Failure_DateTimePast" xml:space="preserve">
-    <value>The date time is in the past.</value>
+  <data name="Validation_Failure_DatePast" xml:space="preserve">
+    <value>The date is in the past.</value>
   </data>
   <data name="Validation_Failure_TemperatureTooHigh" xml:space="preserve">
     <value>The temperature is too high.</value>

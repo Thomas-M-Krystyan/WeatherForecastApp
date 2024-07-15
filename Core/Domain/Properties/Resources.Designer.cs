@@ -61,20 +61,20 @@ namespace WeatherForecastApp.Domain.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The date time should be in UTC format..
+        ///   Looks up a localized string similar to The date should be in UTC format..
         /// </summary>
-        internal static string Validation_Failure_DateTimeLocal {
+        internal static string Validation_Failure_DateLocal {
             get {
-                return ResourceManager.GetString("Validation_Failure_DateTimeLocal", resourceCulture);
+                return ResourceManager.GetString("Validation_Failure_DateLocal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The date time is in the past..
+        ///   Looks up a localized string similar to The date is in the past..
         /// </summary>
-        internal static string Validation_Failure_DateTimePast {
+        internal static string Validation_Failure_DatePast {
             get {
-                return ResourceManager.GetString("Validation_Failure_DateTimePast", resourceCulture);
+                return ResourceManager.GetString("Validation_Failure_DatePast", resourceCulture);
             }
         }
         

@@ -12,14 +12,14 @@ namespace WeatherForecastApp.Domain.Validators
         public ValidatorResponse Validate(DateTime dateTime)
         {
             #pragma warning disable IDE0046  // Converting to conditional expression would decrease code readability
-            if (dateTime.Kind != DateTimeKind.Utc)
+            if (dateTime.Kind == DateTimeKind.Local)
             {
-                return ValidatorResponse.Invalid(Resources.Validation_Failure_DateTimeLocal);
+                return ValidatorResponse.Invalid(Resources.Validation_Failure_DateLocal);
             }
 
             if (dateTime < DateTime.UtcNow)
             {
-                return ValidatorResponse.Invalid(Resources.Validation_Failure_DateTimePast);
+                return ValidatorResponse.Invalid(Resources.Validation_Failure_DatePast);
             }
 
             return ValidatorResponse.Valid();

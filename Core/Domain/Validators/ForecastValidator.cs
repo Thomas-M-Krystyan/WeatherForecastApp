@@ -14,14 +14,14 @@ namespace WeatherForecastApp.Domain.Validators
         public ValidatorResponse Validate(WeatherForecast model)
         {
             #pragma warning disable IDE0046  // Converting to conditional expression would decrease code readability
-            if (model.DateTime.Kind != DateTimeKind.Utc)
+            if (model.DateTime.Kind == DateTimeKind.Local)
             {
-                return ValidatorResponse.Invalid(Resources.Validation_Failure_DateTimeLocal);
+                return ValidatorResponse.Invalid(Resources.Validation_Failure_DateLocal);
             }
 
             if (model.DateTime < DateTime.UtcNow)
             {
-                return ValidatorResponse.Invalid(Resources.Validation_Failure_DateTimePast);
+                return ValidatorResponse.Invalid(Resources.Validation_Failure_DatePast);
             }
 
             if (model.TempCelsius.Value < CommonValues.Database.MinAllowedTemp)

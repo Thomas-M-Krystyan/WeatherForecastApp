@@ -9,7 +9,7 @@ using WeatherForecastApp.Domain.Validators;
 namespace WeatherForecastApp.Domain.Tests.Validators
 {
     [TestFixture]
-    public sealed class WeatherForevastValidatorTests
+    public sealed class ForevastValidatorTests
     {
         private ForecastValidator _validator = null!;
 
@@ -33,7 +33,7 @@ namespace WeatherForecastApp.Domain.Tests.Validators
             WeatherForecast forecast = GetForecast(date: DateTime.Now);
 
             // Act & Assert
-            TestForecastValidator(forecast, false, "The date time should be in UTC format.");
+            TestForecastValidator(forecast, false, "The date should be in UTC format.");
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace WeatherForecastApp.Domain.Tests.Validators
             WeatherForecast forecast = GetForecast(date: DateTime.UtcNow.AddDays(-5));
 
             // Act & Assert
-            TestForecastValidator(forecast, false, "The date time is in the past.");
+            TestForecastValidator(forecast, false, "The date is in the past.");
         }
 
         [Test]
