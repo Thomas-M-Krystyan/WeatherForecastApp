@@ -17,7 +17,7 @@ namespace WeatherForecastApp.WebApi.Handlers
     /// <summary>
     /// <inheritdoc cref="ICommandHandler{TEntity, TModel, TDto}"/>
     /// <para>
-    /// Handles commands associated with weather forecast.
+    /// Handles adding single weather forecast to the repository.
     /// </para>
     /// </summary>
     internal sealed class AddForecastCommandHandler : ICommandHandler<WeatherForecastEntity, WeatherForecast, WeatherForecastDto>
