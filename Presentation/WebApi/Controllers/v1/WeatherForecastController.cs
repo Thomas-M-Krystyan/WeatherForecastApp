@@ -11,8 +11,8 @@ using WeatherForecastApp.Domain.Extensions;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.Persistence.Controllers.Base;
-using WeatherForecastApp.WebApi.DTOs;
 using WeatherForecastApp.WebApi.Handlers;
+using WeatherForecastApp.WebApi.Models.DTOs;
 using WeatherForecastApp.WebApi.Utilities.Swagger.Examples;
 
 namespace WeatherForecastApp.Persistence.Controllers.v1

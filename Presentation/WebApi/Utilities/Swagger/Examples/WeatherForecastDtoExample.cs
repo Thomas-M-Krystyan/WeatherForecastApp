@@ -1,6 +1,6 @@
 ﻿using Swashbuckle.AspNetCore.Filters;
 using System.Diagnostics.CodeAnalysis;
-using WeatherForecastApp.WebApi.DTOs;
+using WeatherForecastApp.WebApi.Models.DTOs;
 
 namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
 {

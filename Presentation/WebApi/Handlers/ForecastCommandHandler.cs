@@ -7,7 +7,7 @@ using WeatherForecastApp.Domain.Converters;
 using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Models.Units;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
-using WeatherForecastApp.WebApi.DTOs;
+using WeatherForecastApp.WebApi.Models.DTOs;
 
 namespace WeatherForecastApp.WebApi.Handlers
 {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace WeatherForecastApp.WebApi.DTOs
+namespace WeatherForecastApp.WebApi.Models.DTOs
 {
     /// <summary>
     /// A generic weather forecast Data Transfer Object (DTO) accepting user inputs.
