@@ -6,7 +6,7 @@ namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
 {
     /// <inheritdoc cref="IExamplesProvider{T}"/>
     [ExcludeFromCodeCoverage]
-    internal readonly struct WeatherForecastDtoExample : IExamplesProvider<WeatherForecastDto>
+    internal sealed class WeatherForecastDtoExample : IExamplesProvider<WeatherForecastDto>
     {
         /// <inheritdoc cref="IExamplesProvider{T}.GetExamples()"/>
         public WeatherForecastDto GetExamples()
@@ -14,7 +14,7 @@ namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
             return new WeatherForecastDto
             {
                 DateTime = System.DateTime.UtcNow,
-                Temperature = default
+                Temperature = 25.0f
             };
         }
     }
