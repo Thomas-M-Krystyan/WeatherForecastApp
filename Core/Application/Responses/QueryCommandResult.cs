@@ -48,9 +48,13 @@ namespace WeatherForecastApp.Application.Responses
         public static QueryCommandResult Failure()
             => new QueryCommandResult(false, 0, Resource.RESPONSE_Command_Failure_NotChanged);
 
-        /// <summary>
-        /// The feedback for interrupted operation.
-        /// </summary>
+        /// <inheritdoc cref="Failure()"/>
+        /// <param name="message">The result message (e.g., from validation).</param>
+        public static QueryCommandResult Failure(string message)
+            => new QueryCommandResult(false, 0, message);
+
+        /// <inheritdoc cref="Failure()"/>
+        /// <param name="exception">The encountered exception.</param>
         public static QueryCommandResult Failure(Exception exception)
             => new QueryCommandResult(false, 0,
                 $"{Resource.RESPONSE_Command_Failure_Error} | {exception.GetType().Name} | {exception.Message}.");

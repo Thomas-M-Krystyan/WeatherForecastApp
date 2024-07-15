@@ -24,9 +24,9 @@ namespace WeatherForecastApp.Application.Handlers
         /// <summary>
         /// Resolves and executes the <typeparamref name="TCommand"/>.
         /// </summary>
+        /// <typeparam name="TCommand">The type of the command.</typeparam>
         /// <param name="dto">The Data Transfer Object (DTO) to be passed.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <typeparam name="TCommand">The type of the command.</typeparam>
         /// <returns>
         /// The response from the executed <typeparamref name="TCommand"/> operation.
         /// </returns>

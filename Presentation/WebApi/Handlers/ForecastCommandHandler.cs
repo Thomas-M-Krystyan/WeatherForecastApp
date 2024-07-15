@@ -7,6 +7,8 @@ using WeatherForecastApp.Domain.Converters;
 using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Models.Units;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
+using WeatherForecastApp.Domain.Respones;
+using WeatherForecastApp.Domain.Validators;
 using WeatherForecastApp.WebApi.Models.DTOs;
 
 namespace WeatherForecastApp.WebApi.Handlers
@@ -34,6 +36,7 @@ namespace WeatherForecastApp.WebApi.Handlers
             where TCommand : class, IQueryCommand<WeatherForecastEntity, WeatherForecast>
         {
             // Converters
+            DateTimeConverterLocalUtc utcConverter = this._serviceResolver.Resolve<DateTimeConverterLocalUtc>();
             TemperatureConverterCF tempConverter = this._serviceResolver.Resolve<TemperatureConverterCF>();
             TemperatureConverterCFeel feelConverter = this._serviceResolver.Resolve<TemperatureConverterCFeel>();
 
@@ -45,7 +48,7 @@ namespace WeatherForecastApp.WebApi.Handlers
                 TemperatureCelsius tempCelsiusUnit = new(dto.Temperature);
 
                 forecast = new(
-                    date: dto.DateTime,
+                    date: utcConverter.ConvertFrom(dto.DateTime),  // NOTE: Ensures to always store time in the database in UTC format
                     tempC: dto.Temperature,
                     tempF: tempConverter.ConvertFrom(tempCelsiusUnit).Value,
                     description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
@@ -56,16 +59,25 @@ namespace WeatherForecastApp.WebApi.Handlers
                 TemperatureCelsius tempCelsiusUnit = tempConverter.ConvertBack(tempFahrenheitUnit);
 
                 forecast = new(
-                    date: dto.DateTime,
+                    date: utcConverter.ConvertFrom(dto.DateTime),  // NOTE: Ensures to always store time in the database in UTC format
                     tempC: tempCelsiusUnit.Value,
                     tempF: dto.Temperature,
                     description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
             }
 
-            // Command
-            TCommand queryCommand = this._serviceResolver.Resolve<TCommand>();
+            // Validation
+            ForecastValidator validator = this._serviceResolver.Resolve<ForecastValidator>();
+            ValidatorResponse validationResult = validator.Validate(forecast);
 
-            return await queryCommand.ExecuteAsync(forecast, cancellationToken);
+            if (validationResult.IsInvalid)
+            {
+                return QueryCommandResult.Failure(validationResult.Message);
+            }
+
+            // Command
+            TCommand command = this._serviceResolver.Resolve<TCommand>();
+            
+            return await command.ExecuteAsync(forecast, cancellationToken);
         }
     }
 }
