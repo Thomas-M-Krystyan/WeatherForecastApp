@@ -14,7 +14,8 @@ namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
             return new WeatherForecastDto
             {
                 DateTime = System.DateTime.UtcNow,
-                Temperature = 25.0f
+                Temperature = 25.0f,
+                Scale = TemperatureScales.Celsius
             };
         }
     }

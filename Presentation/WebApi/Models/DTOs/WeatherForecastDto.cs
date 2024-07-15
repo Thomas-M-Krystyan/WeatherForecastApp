@@ -13,16 +13,27 @@ namespace WeatherForecastApp.WebApi.Models.DTOs
         /// The date and time for which the weather forecast is made.
         /// </summary>
         [JsonRequired]
+        [JsonInclude]
         [JsonPropertyName(nameof(DateTime))]
         [JsonPropertyOrder(0)]
-        public DateTime DateTime { get; set; }
+        internal DateTime DateTime { get; set; }
 
         /// <summary>
-        /// The temperature in scale of user choice (°C, °F, °K).
+        /// The value of the temperature.
         /// </summary>
         [Required]
+        [JsonInclude]
         [JsonPropertyName(nameof(Temperature))]
         [JsonPropertyOrder(1)]
-        public float Temperature { get; set; }
+        internal float Temperature { get; set; }
+
+        /// <summary>
+        /// The scale of the temperature (°C, °F).
+        /// </summary>
+        [Required]
+        [JsonInclude]
+        [JsonPropertyName(nameof(Scale))]
+        [JsonPropertyOrder(2)]
+        internal TemperatureScales Scale { get; set; }
     }
 }

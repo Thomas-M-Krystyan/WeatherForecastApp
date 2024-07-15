@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.IO;
+using System.Text.Json.Serialization;
 using WeatherForecastApp.Domain.Constants;
 using WeatherForecastApp.Domain.Resolvers;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
@@ -38,7 +39,10 @@ namespace WebApi
                                  .AddJsonFile($"{settingsFileName}.{builder.Environment.EnvironmentName}.json", optional: true);
 
             // API endpoints
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));  // Display enum values as strings in Swagger UI
+
             builder.Services.AddEndpointsApiExplorer();
 
             // MS SQL Server
