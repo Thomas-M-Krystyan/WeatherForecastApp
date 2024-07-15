@@ -9,7 +9,7 @@ namespace WeatherForecastApp.Domain.Resolvers.Interfaces
     /// </summary>
     public interface IServiceHandler
     {
-        private IDictionary<string, object> CachedServices
+        private static IDictionary<string, object> CachedServices
             => new ConcurrentDictionary<string /* service name */, object /* instance */>();
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace WeatherForecastApp.Domain.Resolvers.Interfaces
         ///   <see langword="true"/> if the service was retrieved from the cache; otherwise, <see langword="false"/>.
         /// </returns>
         public bool GetCachedService<TService>(out object cachedService)
-            => this.CachedServices.TryGetValue(nameof(TService), out cachedService);
+            => CachedServices.TryGetValue(nameof(TService), out cachedService);
 
         /// <summary>
         /// Creates the given service.
@@ -41,6 +41,6 @@ namespace WeatherForecastApp.Domain.Resolvers.Interfaces
         /// <param name="service">The service to be cached.</param>
         public void CacheService<TService>(TService service)
             where TService : class
-            => this.CachedServices.TryAdd(nameof(TService), service);
+            => CachedServices.TryAdd(nameof(TService), service);
     }
 }

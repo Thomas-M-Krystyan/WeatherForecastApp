@@ -24,11 +24,11 @@
         }
 
         /// <summary>
-        /// The names (keys) of environment variables.
+        /// Common values related to request attributes (protocol, base URL, body, content type...)
         /// </summary>
-        public static class EnvironmentVariables
+        public static class Request
         {
-            public const string ConnectionString = "CONNECTION_STRING";
+            public const string ContentType = "application/json";
         }
     }
 }

@@ -40,7 +40,7 @@ namespace WeatherForecastApp.Application.Responses
         /// The feedback for successful operation.
         /// </summary>
         public static QueryCommandResult Success(int changesCount)
-            => new QueryCommandResult(true, changesCount, Resource.RESPONSE_Command_Success);
+            => new QueryCommandResult(true, changesCount, $"{Resource.RESPONSE_Command_Success} {changesCount}");
 
         /// <summary>
         /// The feedback for failed operation.

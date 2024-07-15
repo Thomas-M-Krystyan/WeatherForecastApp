@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
@@ -12,14 +12,15 @@ using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.Persistence.Controllers.Base;
 using WeatherForecastApp.WebApi.DTOs;
-using WeatherForecastApp.WebApi.Examples;
 using WeatherForecastApp.WebApi.Handlers;
+using WeatherForecastApp.WebApi.Utilities.Swagger.Examples;
 
 namespace WeatherForecastApp.Persistence.Controllers.v1
 {
     /// <summary>
     /// Main functionalities of the Weather Forecast App.
     /// </summary>
+    [ApiVersion("1.0")]
     [Route("api/v1/[controller]")]
     public sealed class WeatherForecastController : BaseApiController
     {
@@ -41,12 +42,10 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         /// <param name="dto">The Data Transfer Object (DTO) to be consumed.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         [HttpPost]
+        [Route("PostForecast")]
         // Swagger UI
-        [SwaggerRequestExample(typeof(WeatherForecastDto), typeof(WeatherForecastDtoExample))]  // NOTE: Documentation of expected JSON schema with sample and valid payload values
-        [ProducesResponseType(StatusCodes.Status200OK,                  Type = typeof(string))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest,          Type = typeof(string))]
-        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(string))]
-        public async Task<IActionResult> PostForecastInCelsiusAsync(
+        [SwaggerRequestExample(typeof(WeatherForecastDto), typeof(WeatherForecastDtoExample))]
+        public async Task<IActionResult> PostForecastAsync(
             [Required, FromBody] WeatherForecastDto dto, CancellationToken cancellationToken)
         {
             try

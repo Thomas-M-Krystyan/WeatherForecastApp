@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -13,8 +14,8 @@ using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.Persistence.Constants;
 using WeatherForecastApp.Persistence.Context;
 using WeatherForecastApp.Persistence.Properties;
-using WeatherForecastApp.WebApi.Examples;
 using WeatherForecastApp.WebApi.Handlers;
+using WeatherForecastApp.WebApi.Utilities.Swagger.Examples;
 
 namespace WebApi
 {
@@ -84,17 +85,17 @@ namespace WebApi
         private static WebApplicationBuilder RegisterInternalServices(this WebApplicationBuilder builder)
         {
             // Resolvers
-            builder.Services.AddSingleton<IServiceHandler, ServiceHandler>();
-            builder.Services.AddSingleton<IServiceResolver, ServiceResolver>();
+            builder.Services.AddScoped<IServiceHandler, ServiceHandler>();
+            builder.Services.AddScoped<IServiceResolver, ServiceResolver>();
 
             // Repositories
             builder.Services.AddScoped<WeatherForecastContext>();
 
             // Handlers
-            builder.Services.AddSingleton<ForecastCommandHandler>();
+            builder.Services.AddScoped<ForecastCommandHandler>();
 
             // Commands
-            builder.Services.AddSingleton<AddForecastCommand>();
+            builder.Services.AddScoped<AddForecastCommand>();
 
             return builder;
         }
@@ -104,8 +105,7 @@ namespace WebApi
             WebApplication app = builder.Build();
 
             app.UseSwagger();
-            app.UseSwaggerUI(option =>
-                option.SwaggerEndpoint($"/swagger/{Resource.Swagger_Version}/swagger.json", nameof(WeatherForecastApp)));
+            app.UseSwaggerUI();
 
             app.UseAuthorization();
 

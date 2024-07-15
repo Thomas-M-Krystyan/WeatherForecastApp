@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using WeatherForecastApp.WebApi.DTOs;
 
-namespace WeatherForecastApp.WebApi.Examples
+namespace WeatherForecastApp.WebApi.Utilities.Swagger.Examples
 {
     /// <inheritdoc cref="IExamplesProvider{T}"/>
     [ExcludeFromCodeCoverage]
@@ -14,7 +14,7 @@ namespace WeatherForecastApp.WebApi.Examples
             return new WeatherForecastDto
             {
                 DateTime = System.DateTime.UtcNow,
-                Temperature = 25.0f
+                Temperature = default
             };
         }
     }
