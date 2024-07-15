@@ -2,13 +2,12 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Responses;
-using WeatherForecastApp.Domain.Extensions;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
+using WeatherForecastApp.Domain.Utilities;
 using WeatherForecastApp.Persistence.Commands;
 using WeatherForecastApp.Persistence.Controllers.Base;
 using WeatherForecastApp.WebApi.Handlers;
@@ -48,7 +47,7 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         public async Task<IActionResult> PostForecastAsync(
             [Required, FromBody] WeatherForecastDto dto, CancellationToken cancellationToken)
         {
-            try
+            return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
                 ForecastCommandHandler handler = this._serviceResolver.Resolve<ForecastCommandHandler>();
                 QueryCommandResult queryResult = await handler.HandleAsync<AddForecastCommand>(dto, cancellationToken);
@@ -56,13 +55,8 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
                 return queryResult.IsSuccess
                     ? Ok(queryResult.ToString())
                     : BadRequest(queryResult.ToString());
-            }
-            catch (Exception exception)
-            {
-                this._logger.LogDetailed(exception);
-
-                return UnprocessableEntity(exception);
-            }
+            },
+            UnprocessableEntity, this._logger);
         }
     }
 }

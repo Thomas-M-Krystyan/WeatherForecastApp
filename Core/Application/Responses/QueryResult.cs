@@ -1,4 +1,6 @@
-﻿namespace WeatherForecastApp.Application.Responses
+﻿using System;
+
+namespace WeatherForecastApp.Application.Responses
 {
     /// <summary>
     /// A generic repository command response.
@@ -35,7 +37,7 @@
         /// <summary>
         /// The feedback for failed query.
         /// </summary>
-        public static QueryResult Failure()
+        public static QueryResult Failure(Exception? _ = null)
             => new QueryResult(false, 0);
     }
 }

@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Commands;
 using WeatherForecastApp.Application.Responses;
-using WeatherForecastApp.Domain.Extensions;
 using WeatherForecastApp.Domain.Models;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
+using WeatherForecastApp.Domain.Utilities;
 using WeatherForecastApp.Persistence.Context;
 
 namespace WeatherForecastApp.Persistence.Commands
@@ -34,7 +33,7 @@ namespace WeatherForecastApp.Persistence.Commands
         /// <inheritdoc cref="IQueryCommand{TEntity, TModel}.ExecuteAsync(TModel, CancellationToken)"/>
         public async Task<QueryCommandResult> ExecuteAsync(WeatherForecast model, CancellationToken cancellationToken)
         {
-            try
+            return await Caller.SafeExecute(async () =>
             {
                 // Preparing a repository entity
                 WeatherForecastEntity entity = new()
@@ -53,13 +52,8 @@ namespace WeatherForecastApp.Persistence.Commands
                 return (result = await repositoryContext.SaveChangesAsync(cancellationToken)).IsSuccess
                     ? QueryCommandResult.Success(result.ChangesCount)
                     : QueryCommandResult.Failure();
-            }
-            catch (Exception exception)
-            {
-                this._logger.LogDetailed(exception);
-
-                return QueryCommandResult.Failure(exception);
-            }
+            },
+            QueryCommandResult.Failure, this._logger);
         }
     }
 }

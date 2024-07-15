@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Repository;
 using WeatherForecastApp.Application.Responses;
-using WeatherForecastApp.Domain.Extensions;
 using WeatherForecastApp.Domain.Models;
+using WeatherForecastApp.Domain.Utilities;
 
 namespace WeatherForecastApp.Persistence.Context
 {
@@ -33,20 +32,15 @@ namespace WeatherForecastApp.Persistence.Context
         /// <inheritdoc cref="IRepositoryContext{TRepository}.SaveChangesAsync(CancellationToken?)"/>
         public async Task<QueryResult> SaveChangesAsync(CancellationToken? cancellationToken)
         {
-            try
+            return await Caller.SafeExecute(async () =>
             {
                 int changesCount = await base.SaveChangesAsync(cancellationToken ?? CancellationToken.None);
 
                 return changesCount > 0
                     ? QueryResult.Success(changesCount)
                     : QueryResult.Failure();
-            }
-            catch (Exception exception)
-            {
-                this._logger.LogDetailed(exception);
-
-                return QueryResult.Failure();
-            }
+            },
+            QueryResult.Failure, this._logger);
         }
     }
 }
