@@ -18,14 +18,14 @@ namespace WeatherForecastApp.Domain.Tests.Converters
         [TestCase(-273.16f, FeelingTemperature.Unknown)]
         // Beyond ranges
         [TestCase(-75, FeelingTemperature.Freezing)]
-        [TestCase( 75, FeelingTemperature.Scorching)]
+        [TestCase(75, FeelingTemperature.Scorching)]
         // Within ranges
         [TestCase(-60.0f, FeelingTemperature.Freezing)]
         [TestCase(-59.9f, FeelingTemperature.Freezing)]
-        [TestCase(  0.0f, FeelingTemperature.Warm)]
-        [TestCase(float.NegativeZero, FeelingTemperature.Warm)]
-        [TestCase(float.Epsilon, FeelingTemperature.Warm)]
-        [TestCase( 60.0f, FeelingTemperature.Scorching)]
+        [TestCase(0.0f, FeelingTemperature.Freezing)]
+        [TestCase(float.NegativeZero, FeelingTemperature.Freezing)]
+        [TestCase(float.Epsilon, FeelingTemperature.Freezing)]
+        [TestCase(60.0f, FeelingTemperature.Scorching)]
         public void ConvertFrom_C_ToFeelingTemperature_ReturnsExpectedEnum(float testTemperature, FeelingTemperature expectedFeeling)
         {
             // Arrange
