@@ -20,14 +20,14 @@ namespace WeatherForecastApp.WebApi.Handlers
     /// Handles commands associated with weather forecast.
     /// </para>
     /// </summary>
-    internal sealed class ForecastCommandHandler : ICommandHandler<WeatherForecastEntity, WeatherForecast, WeatherForecastDto>
+    internal sealed class AddForecastCommandHandler : ICommandHandler<WeatherForecastEntity, WeatherForecast, WeatherForecastDto>
     {
         private readonly IServiceResolver _serviceResolver;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ForecastCommandHandler"/> class.
+        /// Initializes a new instance of the <see cref="AddForecastCommandHandler"/> class.
         /// </summary>
-        public ForecastCommandHandler(IServiceResolver serviceResolver)
+        public AddForecastCommandHandler(IServiceResolver serviceResolver)
         {
             this._serviceResolver = serviceResolver;
         }

@@ -97,7 +97,7 @@ namespace WebApi
             builder.Services.AddScoped<WeatherForecastContext>();
 
             // Handlers
-            builder.Services.AddScoped<ForecastCommandHandler>();
+            builder.Services.AddScoped<AddForecastCommandHandler>();
 
             // Commands
             builder.Services.AddScoped<AddForecastCommand>();

@@ -50,7 +50,7 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         {
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
-                ForecastCommandHandler handler = this._serviceResolver.Resolve<ForecastCommandHandler>();
+                AddForecastCommandHandler handler = this._serviceResolver.Resolve<AddForecastCommandHandler>();
                 QueryCommandResult queryResult = await handler.HandleAsync<AddForecastCommand>(dto, cancellationToken);
 
                 return queryResult.IsSuccess
@@ -73,7 +73,7 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
                 return Ok();
-                //ForecastCommandHandler handler = this._serviceResolver.Resolve<ForecastCommandHandler>();
+                //AddForecastCommandHandler handler = this._serviceResolver.Resolve<AddForecastCommandHandler>();
                 //QueryCommandResult queryResult = await handler.HandleAsync<AddForecastCommand>(dto, cancellationToken);
 
                 //return queryResult.IsSuccess
