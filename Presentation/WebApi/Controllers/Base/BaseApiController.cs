@@ -12,6 +12,7 @@ namespace WeatherForecastApp.Persistence.Controllers.Base
     [ProducesResponseType(StatusCodes.Status200OK,                  Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status400BadRequest,          Type = typeof(string))]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity, Type = typeof(string))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
     // Default data contracts (JSON)
     [Consumes(CommonValues.Request.ContentType)]
     [Produces(CommonValues.Request.ContentType)]
