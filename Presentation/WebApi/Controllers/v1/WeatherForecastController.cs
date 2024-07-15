@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Responses;
-using WeatherForecastApp.Domain.Constants;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Domain.Utilities;
 using WeatherForecastApp.Persistence.Constants;
