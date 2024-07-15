@@ -17,7 +17,7 @@ namespace WeatherForecastApp.WebApi.Handlers
     /// Handles commands associated with weather forecast.
     /// </para>
     /// </summary>
-    public sealed class ForecastCommandHandler : ICommandHandler<WeatherForecastEntity, WeatherForecast, WeatherForecastDto>
+    internal sealed class ForecastCommandHandler : ICommandHandler<WeatherForecastEntity, WeatherForecast, WeatherForecastDto>
     {
         private readonly IServiceResolver _serviceResolver;
 
@@ -38,13 +38,29 @@ namespace WeatherForecastApp.WebApi.Handlers
             TemperatureConverterCFeel feelConverter = this._serviceResolver.Resolve<TemperatureConverterCFeel>();
 
             // Data
-            var tempCelsiusUnit = new TemperatureCelsius(dto.Temperature);
+            WeatherForecast forecast;
 
-            WeatherForecast forecast = new(
-                date: dto.DateTime,
-                tempC: dto.Temperature,
-                tempF: tempConverter.ConvertFrom(tempCelsiusUnit).Value,
-                description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
+            if (dto.Scale == TemperatureScales.Celsius)
+            {
+                TemperatureCelsius tempCelsiusUnit = new(dto.Temperature);
+
+                forecast = new(
+                    date: dto.DateTime,
+                    tempC: dto.Temperature,
+                    tempF: tempConverter.ConvertFrom(tempCelsiusUnit).Value,
+                    description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
+            }
+            else
+            {
+                TemperatureFahrenheit tempFahrenheitUnit = new(dto.Temperature);
+                TemperatureCelsius tempCelsiusUnit = tempConverter.ConvertBack(tempFahrenheitUnit);
+
+                forecast = new(
+                    date: dto.DateTime,
+                    tempC: tempCelsiusUnit.Value,
+                    tempF: dto.Temperature,
+                    description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
+            }
 
             // Command
             TCommand queryCommand = this._serviceResolver.Resolve<TCommand>();
