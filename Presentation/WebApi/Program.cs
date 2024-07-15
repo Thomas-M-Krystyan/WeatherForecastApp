@@ -31,6 +31,11 @@ namespace WebApi
 
         private static WebApplicationBuilder RegisterExternalServices(this WebApplicationBuilder builder)
         {
+            // Configuration appsettings.json files
+            const string settingsFileName = "appsettings";
+            builder.Configuration.AddJsonFile($"{settingsFileName}.json", optional: false)
+                                 .AddJsonFile($"{settingsFileName}.{builder.Environment.EnvironmentName}.json", optional: true);
+
             // API endpoints
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -39,7 +44,7 @@ namespace WebApi
             builder.Services.AddDbContext<WeatherForecastContext>(options =>
             {
                 options.UseSqlServer(
-                    connectionString: Environment.GetEnvironmentVariable(CommonValues.EnvironmentVariables.ConnectionString));
+                    connectionString: builder.Configuration.GetConnectionString(CommonValues.Settings.DefaultConnectionString));
             });
 
             // Swagger UI

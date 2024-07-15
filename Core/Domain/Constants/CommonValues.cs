@@ -6,6 +6,14 @@
     public static class CommonValues
     {
         /// <summary>
+        /// The configuration keys from appsettings.json.
+        /// </summary>
+        public static class Settings
+        {
+            public const string DefaultConnectionString = "DefaultConnection";
+        }
+
+        /// <summary>
         /// Common values used by a database contexts, entities, and validation.
         /// </summary>
         public static class Database
