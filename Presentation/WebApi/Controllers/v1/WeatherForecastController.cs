@@ -8,8 +8,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Responses;
+using WeatherForecastApp.Domain.Constants;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
 using WeatherForecastApp.Domain.Utilities;
+using WeatherForecastApp.Persistence.Constants;
 using WeatherForecastApp.Persistence.Controllers.Base;
 using WeatherForecastApp.WebApi.Handlers;
 using WeatherForecastApp.WebApi.Models.DTOs;
@@ -68,7 +70,7 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         [HttpGet]
         [Route("GetWeeklyForecast")]
         public async Task<IActionResult> GetWeeklyForecastAsync(
-            [Required, DefaultValue("2024-07-15")] DateOnly startDate, CancellationToken cancellationToken)
+            [Required, DefaultValue(ApiCommonValues.Examples.DateOnly)] DateOnly startDate, CancellationToken cancellationToken)
         {
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
