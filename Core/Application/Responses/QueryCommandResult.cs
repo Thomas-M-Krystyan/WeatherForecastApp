@@ -66,6 +66,12 @@ namespace WeatherForecastApp.Application.Responses
                 $"{Resource.RESPONSE_Command_Failure_Error} | {exception.GetType().Name} | {exception.Message}.");
 
         /// <summary>
+        /// The queried or looked up element is already existing.
+        /// </summary>
+        public static QueryCommandResult Existing()
+            => new QueryCommandResult(false, 0, Resource.RESPONSE_Query_Failure_ExistingPK);
+
+        /// <summary>
         /// Displays human-friendly result summary.
         /// </summary>
         public override string ToString() => this.Content;

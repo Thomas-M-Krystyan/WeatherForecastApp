@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WeatherForecastApp.Application.Commands;
@@ -36,8 +37,8 @@ namespace WeatherForecastApp.Persistence.Commands
         {
             return await Caller.SafeExecute(async () =>
             {
-                // Preparing a repository entity
-                WeatherForecastEntity entity = new()
+                // Preparing a repository newEntity
+                WeatherForecastEntity newEntity = new()
                 {
                     Date = DateOnly.FromDateTime(model.DateTime),
                     TempCelsius = model.TempCelsius.Value,
@@ -47,7 +48,13 @@ namespace WeatherForecastApp.Persistence.Commands
                 // Modifying a repository
                 WeatherForecastContext repositoryContext = this._serviceResolver.Resolve<WeatherForecastContext>();
 
-                repositoryContext.Entities.Add(entity);
+                bool primaryKeyExists = (await repositoryContext.Entities.FindAsync(newEntity.Date)) != null;
+                if (primaryKeyExists)
+                {
+                    return QueryCommandResult.Existing();
+                }
+
+                repositoryContext.Entities.Add(newEntity);
 
                 QueryResult result;
                 return (result = await repositoryContext.SaveChangesAsync(cancellationToken)).IsSuccess

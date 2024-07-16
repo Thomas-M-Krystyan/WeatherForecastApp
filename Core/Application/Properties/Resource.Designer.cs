@@ -86,5 +86,14 @@ namespace WeatherForecastApp.Application.Properties {
                 return ResourceManager.GetString("RESPONSE_Command_Success", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Element with this Primary Key is already existing..
+        /// </summary>
+        internal static string RESPONSE_Query_Failure_ExistingPK {
+            get {
+                return ResourceManager.GetString("RESPONSE_Query_Failure_ExistingPK", resourceCulture);
+            }
+        }
     }
 }

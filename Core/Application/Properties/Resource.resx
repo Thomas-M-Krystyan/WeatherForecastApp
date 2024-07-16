@@ -129,4 +129,8 @@
     <value>The operation was successful. Number of changes:</value>
     <comment>Command (generic)</comment>
   </data>
+  <data name="RESPONSE_Query_Failure_ExistingPK" xml:space="preserve">
+    <value>Element with this Primary Key is already existing.</value>
+    <comment>Query (SQL database)</comment>
+  </data>
 </root>
