@@ -35,6 +35,15 @@ namespace WeatherForecastApp.WebApi.Handlers
         /// <inheritdoc cref="ICommandHandler{TData}.HandleAsync(TData, CancellationToken)"/>
         public async Task<QueryCommandResult> HandleAsync(WeatherForecastDto dto, CancellationToken cancellationToken)
         {
+            // Validation #1
+            DateValidator dateValidator = this._serviceResolver.Resolve<DateValidator>();
+            ValidatorResponse dateValidationResult = dateValidator.Validate(dto.Date.ToDateTime(default));
+
+            if (dateValidationResult.IsInvalid)
+            {
+                return QueryCommandResult.Failure(dateValidationResult.Message);
+            }
+
             // Converters
             DateTimeConverterLocalUtc utcConverter = this._serviceResolver.Resolve<DateTimeConverterLocalUtc>();
             TemperatureConverterCF tempConverter = this._serviceResolver.Resolve<TemperatureConverterCF>();
@@ -65,13 +74,13 @@ namespace WeatherForecastApp.WebApi.Handlers
                     description: feelConverter.ConvertFrom(tempCelsiusUnit).ToString());
             }
 
-            // Validation
-            ForecastValidator validator = this._serviceResolver.Resolve<ForecastValidator>();
-            ValidatorResponse validationResult = validator.Validate(forecast);
+            // Validation #2
+            ForecastValidator forecastValidator = this._serviceResolver.Resolve<ForecastValidator>();
+            ValidatorResponse forecastValidationResult = forecastValidator.Validate(forecast);
 
-            if (validationResult.IsInvalid)
+            if (forecastValidationResult.IsInvalid)
             {
-                return QueryCommandResult.Failure(validationResult.Message);
+                return QueryCommandResult.Failure(forecastValidationResult.Message);
             }
 
             // Command

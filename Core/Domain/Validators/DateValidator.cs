@@ -1,4 +1,5 @@
 ﻿using System;
+using WeatherForecastApp.Domain.Extensions;
 using WeatherForecastApp.Domain.Properties;
 using WeatherForecastApp.Domain.Respones;
 using WeatherForecastApp.Domain.Validators.Interfaces;
@@ -17,7 +18,7 @@ namespace WeatherForecastApp.Domain.Validators
                 return ValidatorResponse.Invalid(Resources.Validation_Failure_DateLocal);
             }
 
-            if (dateTime < DateTime.UtcNow)
+            if (dateTime.ToDateOnly() < DateTime.UtcNow.ToDateOnly())
             {
                 return ValidatorResponse.Invalid(Resources.Validation_Failure_DatePast);
             }

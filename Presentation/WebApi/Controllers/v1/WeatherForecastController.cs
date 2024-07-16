@@ -51,8 +51,9 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         {
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
-                AddForecastCommandHandler handler = this._serviceResolver.Resolve<AddForecastCommandHandler>();
-                QueryCommandResult queryResult = await handler.HandleAsync(dto, cancellationToken);
+                QueryCommandResult queryResult = await this._serviceResolver
+                    .Resolve<AddForecastCommandHandler>()
+                    .HandleAsync(dto, cancellationToken);
 
                 return queryResult.IsSuccess
                     ? Ok(queryResult.ToString())
@@ -64,7 +65,7 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         /// <summary>
         /// Gets weather forecast for up to a week (starting from a provided date).
         /// </summary>
-        /// <param name="startDate">The date from which one week will be counted.</param>
+        /// <param name="startDate">The date (in UTC format) from which one week will be counted.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         [HttpGet]
         [Route("GetWeeklyForecast")]
@@ -73,8 +74,9 @@ namespace WeatherForecastApp.Persistence.Controllers.v1
         {
             return await Caller.SafeExecute<IActionResult, WeatherForecastController>(async () =>
             {
-                GetWeeklyForecastCommandHandler handler = this._serviceResolver.Resolve<GetWeeklyForecastCommandHandler>();
-                QueryCommandResult queryResult = await handler.HandleAsync(startDate, cancellationToken);
+                QueryCommandResult queryResult = await this._serviceResolver
+                    .Resolve<GetWeeklyForecastCommandHandler>()
+                    .HandleAsync(startDate, cancellationToken);
 
                 return queryResult.IsSuccess
                     ? Ok(queryResult.ToString())

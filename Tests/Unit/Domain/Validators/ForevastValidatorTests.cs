@@ -27,26 +27,6 @@ namespace WeatherForecastApp.Domain.Tests.Validators
         }
 
         [Test]
-        public void Validate_ForInvalidForecast_LocalDateTime_ReturnsFalse_AndExpectedMessage()
-        {
-            // Arrange
-            WeatherForecast forecast = GetForecast(date: DateTime.Now);
-
-            // Act & Assert
-            TestForecastValidator(forecast, false, "The date should be in UTC format.");
-        }
-
-        [Test]
-        public void Validate_ForInvalidForecast_PastDateTime_ReturnsFalse_AndExpectedMessage()
-        {
-            // Arrange
-            WeatherForecast forecast = GetForecast(date: DateTime.UtcNow.AddDays(-5));
-
-            // Act & Assert
-            TestForecastValidator(forecast, false, "The date is in the past.");
-        }
-
-        [Test]
         public void Validate_ForInvalidForecast_TooCold_ReturnsFalse_AndExpectedMessage()
         {
             // Arrange

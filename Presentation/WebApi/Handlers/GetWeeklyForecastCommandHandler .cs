@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using WeatherForecastApp.Application.Handlers;
 using WeatherForecastApp.Application.Responses;
 using WeatherForecastApp.Domain.Resolvers.Interfaces;
-using WeatherForecastApp.Domain.Respones;
-using WeatherForecastApp.Domain.Validators;
 using WeatherForecastApp.Persistence.Commands;
 
 namespace WeatherForecastApp.WebApi.Handlers
@@ -31,15 +29,6 @@ namespace WeatherForecastApp.WebApi.Handlers
         /// <inheritdoc cref="ICommandHandler{TData}.HandleAsync(TData, CancellationToken)"/>
         public async Task<QueryCommandResult> HandleAsync(DateOnly startDate, CancellationToken cancellationToken)
         {
-            // Validation
-            DateValidator validator = this._serviceResolver.Resolve<DateValidator>();
-            ValidatorResponse validationResult = validator.Validate(startDate.ToDateTime(default));
-
-            if (validationResult.IsInvalid)
-            {
-                return QueryCommandResult.Failure(validationResult.Message);
-            }
-
             // Command
             GetWeeklyForecastCommand command = this._serviceResolver.Resolve<GetWeeklyForecastCommand>();
 
