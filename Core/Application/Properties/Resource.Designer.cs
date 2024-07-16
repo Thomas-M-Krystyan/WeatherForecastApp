@@ -70,7 +70,7 @@ namespace WeatherForecastApp.Application.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The operation wasn&apos;t successful. Nothing was changed..
+        ///   Looks up a localized string similar to The operation wasn&apos;t successful. Nothing happened..
         /// </summary>
         internal static string RESPONSE_Command_Failure_NotChanged {
             get {

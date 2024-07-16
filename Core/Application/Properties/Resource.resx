@@ -122,7 +122,7 @@
     <comment>Command (generic)</comment>
   </data>
   <data name="RESPONSE_Command_Failure_NotChanged" xml:space="preserve">
-    <value>The operation wasn't successful. Nothing was changed.</value>
+    <value>The operation wasn't successful. Nothing happened.</value>
     <comment>Command (generic)</comment>
   </data>
   <data name="RESPONSE_Command_Success" xml:space="preserve">
